@@ -65,6 +65,7 @@
             </td>
 
             <td>
+                последние 2 ссылки на реальные сайты
             </td>
 
         </tr>
@@ -94,7 +95,7 @@
                 <a href="newOrder.php">
                     <button class="btn btn-primary" type="submit">
                             <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"
-                                  title="Домашняя страница"></span>
+                                  title="Новый заказ"></span>
                     </button>
                 </a>
 

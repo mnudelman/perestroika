@@ -1,6 +1,6 @@
 <?php
 /**
-  * Голова страницы
+ * Голова страницы
  */
 ?>
 <div class="navbar navbar-default navbar-fixed-top">
@@ -17,26 +17,32 @@
             <ul class="nav navbar-nav">
 
                 <li>
-                    <a href="index">ГЛАВНАЯ</a>
+                    <a href="homePage.php">ГЛАВНАЯ</a>
                 </li>
                 <li>
-                    <a href="/offer/">
-    СДЕЛАТЬ ЗАКАЗ
-</a>
+                    <a href="newOrder.php">
+                        СДЕЛАТЬ ЗАКАЗ
+                    </a>
                 </li>
+                <li >
+                    <a href="developersList.php">
+                        ИСПОЛНИТЕЛИ РАБОТ
+                    </a>
+                </li>
+
                 <li class="current">
-                    <a href="/about/">
-    О САЙТЕ
-</a>
-                </li>
-                <li>
-                    <a href="/registration/">
-    РЕГИСТРАЦИЯ
+                    <a href="#">
+                        О САЙТЕ
                     </a>
                 </li>
                 <li>
-                    <a href="/forum/">
-    ФОРУМ
+                    <a href="#">
+                        РЕГИСТРАЦИЯ
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        ФОРУМ
                     </a>
                 </li>
 
@@ -51,7 +57,7 @@
             <ul class="nav navbar-nav navbar-right">
 
                 <li>
-                    <a href="#" class="change-locaton" title="организация. по умолчанию 'гость'">
+                    <a href="privateOffice.php" class="change-locaton" title="личный кабинет">
                         <i class="fa fa-map-marker">minkin&Ko</i>
                     </a>
                 </li>
@@ -66,7 +72,7 @@
         <div class="container-fluid">
             <div class="row" style="background-color: white;">
                 <div class="navbar-header">
-                    <a  href="#">
+                    <a href="#">
                         <img alt="Brand" class="image-logo" src="images/logo.jpg">
                     </a>
                 </div>

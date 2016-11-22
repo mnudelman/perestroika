@@ -4,7 +4,7 @@
  *
  */
 ?>
-<h3 class="header-title" style="text-align: left;">Работы, выполняемые исполнителем</h3>
+<h3 class="header-title" style="text-align: left;">Мои работы/услуги</h3>
 
 <div class="row">
     <div class="col-md-6">
@@ -33,7 +33,7 @@
         <table class="table">
             <tr>
                 <th>
-                    Наименование работ
+                    Наименование работ/услуг
                 </th>
                 <th>
                     организация выполняет работу
@@ -41,7 +41,7 @@
             </tr>
             <tr>
                 <td>
-                    Алмазное буреие отверстий в бетоне
+                    Алмазное бурение отверстий в бетоне
                 </td>
                 <td>
                     <div class="checkbox">

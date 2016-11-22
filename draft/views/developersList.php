@@ -28,7 +28,7 @@
 </div>
 <div class="row">
 
-    <div class="col-md-8">
+    <div class="col-md-8 block">
         <table class="table">
             <tr>
                 <th>
@@ -140,7 +140,49 @@
             </td>
 
         </tr>
+        <tr>
+            <td>
+                Алмазная резка и бурение в Оренбурге
+            </td>
+            <td>
+                <a href="http://www.macmep.com/almaznaya-rezka-bureniye-orenburg?yclid=6935773512505230481"
+                     target="_blank" title="реальный сайт">
+                <button class="btn btn-primary" type="submit">
+
+
+                    <span class="glyphicon glyphicon-triangle-right" aria-hidden="true" title="подробнее"></span>
+                </button>
+                </a>
+            </td>
+
+            <td>
+                <input type="date" class="form-control" id="date2" placeholder="dd/mm/yyyy">
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                Резка бетона в Оренбурге
+            </td>
+            <td>
+                <a href="http://rezkabetona56.ru/index.php/home"
+                   target="_blank" title="реальный сайт">
+                    <button class="btn btn-primary" type="submit">
+
+
+                        <span class="glyphicon glyphicon-triangle-right" aria-hidden="true" title="подробнее"></span>
+                    </button>
+                </a>
+            </td>
+
+            <td>
+                <input type="date" class="form-control" id="date2" placeholder="dd/mm/yyyy">
+            </td>
+
+        </tr>
 
     </table>
 </div>
 </div>
+
+
