@@ -17,47 +17,47 @@
             <ul class="nav navbar-nav">
 
                 <li>
-                    <a href="homePage.php">ГЛАВНАЯ</a>
+                    <a href="?page=homePage">ГЛАВНАЯ</a>
                 </li>
                 <li>
-                    <a href="newOrder.php">
+                    <a href="?page=newOrder">
                         СДЕЛАТЬ ЗАКАЗ
                     </a>
                 </li>
                 <li >
-                    <a href="developersList.php">
+                    <a href="?page=developersList">
                         ИСПОЛНИТЕЛИ РАБОТ
                     </a>
                 </li>
 
                 <li class="current">
-                    <a href="#">
+                    <a href="?page=about">
                         О САЙТЕ
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="?page=registration">
                         РЕГИСТРАЦИЯ
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="?page=forum">
                         ФОРУМ
                     </a>
                 </li>
 
 
-                <li><a href="#" data-toggle="modal" data-target="#loginDialog">ВОЙТИ</a></li>
+                <li><a href="?page=authorisation" >ВОЙТИ</a></li>
 
-                <li><a href="#">
-                        <img src="images/ru.png" class="img-responsive" alt="russian language" title="русский язык">
+                <li><a href="?page=languageTrigger">
+                        <img src="images/ru.png" class="img-responsive" alt="russian language" title="переключение языка">
                     </a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
                 <li>
-                    <a href="privateOffice.php" class="change-locaton" title="личный кабинет">
+                    <a href="?page=privateOffice" class="change-locaton" title="личный кабинет">
                         <i class="fa fa-map-marker">minkin&Ko</i>
                     </a>
                 </li>
