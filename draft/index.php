@@ -3,7 +3,7 @@
   * Главный шаблон
   */
 $pageNames = [
-    'homePage' => 'Перестройка',
+    'homePage' => 'Перестройка__',
     'developersList' => 'исполнители',
     'newOrder' => 'заказ',
     'about' => 'о сайте',
