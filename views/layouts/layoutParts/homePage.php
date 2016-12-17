@@ -3,6 +3,8 @@
  * контент Главной страницы
  * Time: 17:25
  */
+use yii\helpers\Html ;
+//use yii\helpers\Url ;
 ?>
 <div class="umb-grid">
     <div class="grid-section">
@@ -53,11 +55,28 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 block">
-            <p><strong>алмазная резка и бурение</strong></p>
+        <?php
+        $pText = '<strong>алмазная резка и бурение</strong>' ;
+        $p = Html::tag('p', Html::encode($pText)) ;
+        $img = Html::img('@web/images/алмазная резка и бурение.jpg',
+            ['class'=>'img-responsive img-thumbnail','alt'=>'this is picture']) ;
+        $div=Html::tag('div',$img);
+        $a = Html::a($div,'#',['title'=>'diamond','data-toggle'=>"modal",'data-target'=>"#myModal"]) ;
+        echo $a ;
+        ?>
 
-            <div>
-                <img src="images/алмазная резка и бурение.jpg" class="img-responsive img-thumbnail" alt="">
-            </div>
+
+
+
+
+
+
+
+<!--            <p><strong>алмазная резка и бурение</strong></p>-->
+<!---->
+<!--            <div>-->
+<!--                <img src="images/алмазная резка и бурение.jpg" class="img-responsive img-thumbnail" alt="">-->
+<!--            </div>-->
         </div>
         <div class="col-md-4 block">
             <p><strong>Демонтажные работы</strong></p>
@@ -169,4 +188,29 @@
 
 </div>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">войти</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputName">Имя</label>
+                        <input type="text" class="form-control" id="exampleInputName" placeholder="Имя">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">пароль</label>
+                        <input type="password" class="form-control" id="exampleInputEmail1" placeholder="пароль">
+                    </div>
+                    <button type="submit" class="btn btn-default" data-dismiss="modal">войти</button>
+                    <button type="submit" class="btn btn-default" data-dismiss="modal">регистрация</button>
+                </form>
 
+            </div>
+        </div>
+    </div>
+</div>

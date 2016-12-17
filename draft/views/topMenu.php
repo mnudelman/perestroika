@@ -94,7 +94,20 @@
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+<?php
+//    Modal::begin([
+//    'header' => '<h2>Hello world</h2>',
+//    'toggleButton' => ['label' => 'click me'],
+//    ]);
+//
+//    echo 'Say hello...';
+//
+//    Modal::end();
+// ?>
+<!--</div>-->
+
+
+   <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span

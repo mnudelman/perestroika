@@ -1,20 +1,21 @@
 <?php
-
+session_start() ;
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
 $dirInfo = pathinfo($_SERVER['DOCUMENT_ROOT'].$_SERVER['REQUEST_URI']) ;
 $dir = $dirInfo['dirname'] ;
 $dirProjects = realpath($dir.'/../..') ;
+$dirTask = $dirProjects . '/perestroika' ;
 //realpath((pathinfo($_SERVER['DOCUMENT_ROOT'].$_SERVER['REQUEST_URI']))['dirname'].'/../..')
 //$dirProjects = realpath(__DIR__ . '../../../') ;
 require(__DIR__ . '/functions.php') ;
-$dirVendor = $dirProjects .'/Yii2Vendor/vendor' ;
+$dirVendor = $dirTask . '/vendor' ;
 
 require($dirVendor . '/autoload.php');
 require($dirVendor . '/yiisoft/yii2/Yii.php');
 
-$dirTask = $dirProjects . '/perestroika' ;
+
 //require(__DIR__ . '/../vendor/autoload.php');
 //require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 

@@ -10,9 +10,14 @@ namespace app\controllers;
 
 
 use yii\web\Controller;
+use app\controllers\BaseController ;
 
-class AboutController extends Controller {
+class AboutController extends BaseController {
     public function actionIndex()
+    {
+        return $this->render('index');
+    }
+    public function action__Language()
     {
         return $this->render('index');
     }

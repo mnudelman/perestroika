@@ -13,8 +13,9 @@ use yii\web\Controller;
 //use yii\filters\VerbFilter;
 //use app\models\LoginForm;
 //use app\models\ContactForm;
+use app\controllers\BaseController ;
 
-class SiteController extends Controller
+class SiteController extends BaseController
 {
      /**
      * Displays homepage.
@@ -24,6 +25,10 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+    public function actionAbout()
+    {
+        return $this->render('about');
     }
 
  }

@@ -4,10 +4,12 @@
   */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\service\PageItems ;
 
 AppAsset::register($this);
 $pageNames = [
@@ -27,18 +29,15 @@ $pageName = ( isset($pageNames[$currentPage]) ) ? $pageNames[$currentPage] : 'no
 $prefix = ($currentPage === 'homePage') ? '' : 'Пере...|' ;
 
 $title =  $prefix . $pageName ;
+if (isset($_SESSION['lang'])) {
+    Yii::$app->language = $_SESSION['lang'] ;
+}
+
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <?php
-//        include __DIR__ . "/layoutParts/headPart.php";
-
-        ?>
-<!--        --><?//=$this->render('layoutParts/headPart')?>
-<!--        <title>--><?//= $title ?><!--</title>-->
-<!--        <link id="page_favicon" href="images/favicon.ico" rel="icon" type="image/x-icon" >-->
         <meta charset="<?= Yii::$app->charset ?>">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -55,81 +54,26 @@ $title =  $prefix . $pageName ;
          }
 
      </style>
-
-
     </head>
 <body>
 <?php $this->beginBody() ?>
 
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-//        'brandLabel' => 'My Company',
-//        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-default navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-left'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/about/index']],
-            ['label' => 'Order', 'url' => ['/order/index']],
-//            Yii::$app->user->isGuest ? (
-//            ['label' => 'Login', 'url' => ['/site/login']]
-//            ) : (
-//                '<li>'
-//                . Html::beginForm(['/site/logout'], 'post')
-//                . Html::submitButton(
-//                    'Logout (' . Yii::$app->user->identity->username . ')',
-//                    ['class' => 'btn btn-link logout']
-//                )
-//                . Html::endForm()
-//                . '</li>'
-//            )
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            Yii::$app->user->isGuest ? (
-            ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
-    ?>
-    <div>
-        <nav class="navbar navbar-default" style="margin-top:30px">
-            <div class="container-fluid">
-                <div class="row" style="background-color: white;">
-                    <div class="navbar-header">
-                        <a href="#">
-                            <img alt="Brand" class="image-logo" src="images/logo.jpg">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
-
+<!--<div class="wrap">-->
+<?=$this->render('layoutParts/topPage')?>
     <div class="container">
         <?= $content ?>
     </div>
-</div>
+
 
 <?=$this->render('layoutParts/footerPart')?>
+
+
+// мгновенный вывод alert
+<?//= Html::script('alert("Привет!");', ['defer' => true]);?>
+//
+
+
 <?php $this->endBody() ?>
 </body>
 </html>

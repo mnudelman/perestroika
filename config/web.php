@@ -1,7 +1,8 @@
 <?php
 $dirProjects = realpath($dir.'/../..') ;
-$dirVendor = $dirProjects .'/Yii2Vendor/vendor' ;
 $dirTask = $dirProjects . '/perestroika' ;
+$dirVendor = $dirTask . '/vendor' ;
+
 $dirConfig = $dirTask . '/config' ;
 
 
@@ -46,14 +47,14 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
+//        'urlManager' => [
+//            'enablePrettyUrl' => true,
+//            'showScriptName' => false,
+//            'enableStrictParsing' => false,
+//            'rules' => [
+//               '<controller:>/language/<ln:\w+>' => '<controller:>/language',
+//            ],
+//        ],
     ],
     'params' => $params,
 ];

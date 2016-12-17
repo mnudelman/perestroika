@@ -2,31 +2,39 @@
 /**
  * подвал страницы
  */
+use yii\bootstrap\NavBar;
+use yii\bootstrap\Nav;
 ?>
-<!--#263c49-->
-<footer style="color: white; background-color: #263c49; width: 100%; min-height: 30px;">
+<footer >
     <div class="container-fluid" style="padding-top:5px; padding-bottom:5px;">
         <div class="row">
-            <div class="col-md-6">
-                <div
-                    style="vertical-align: middle; color: #fff; background-color: #263c49; width: 100%; height: 50px;">
-                    ©
-                    Pere-stroika.ru 2016
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="social-icons pull-right">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
+
+<!--            <div class="wrap">-->
+                <?php
+                NavBar::begin([
+                    'options' => [
+                        'class' => 'navbar-default',
+                    ],
+                ]);
+                echo Nav::widget([
+                    'options' => ['class' => 'navbar-nav navbar-left'],
+                    'items' => [
+                        '<li style="margin-top:13px;color:#ac0812">© Pere-stroika.ru 2016</li>'
+                    ],
+                ]);
+                echo Nav::widget([
+                    'options' => ['class' => 'nav-reverse navbar-nav navbar-right'],
+                    'items' => [
+                        '<li><a href="#"><i class="fa fa-facebook-square fa-lg"></i></a></li>',
+                        '<li><a href="#"><i class="fa fa-twitter-square fa-lg"></i></a></li>',
+                        '<li><a href="#"><i class="fa fa-odnoklassniki-square fa-lg"></i></a></li>',
+                    ],
+                ]);
+                NavBar::end();
+                ?>
+<!--            </div>-->
         </div>
     </div>
 </footer>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
-<!--<script src="bootstrap/js/bootstrap.min.js"></script>-->
+
+
