@@ -10,6 +10,8 @@ namespace app\controllers;
 //use Yii;
 //use yii\filters\AccessControl;
 use yii\web\Controller;
+use Yii ;
+use app\service\PageItems ;
 //use yii\filters\VerbFilter;
 //use app\models\LoginForm;
 //use app\models\ContactForm;
@@ -29,6 +31,16 @@ class SiteController extends BaseController
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    public function actionWorkDirectGet() {
+        if( Yii::$app->request->isAjax ){
+            $query = Yii::$app->request->post() ;
+            $wdId = $query['wdid'] ;
+
+            $wdContent = PageItems::getItemText(['wd-' . $wdId,'content']) ; ;
+
+            echo $wdContent['text'];
+        }
     }
 
  }

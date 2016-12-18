@@ -32,7 +32,23 @@ $text_ru = <<<TEXT
 
 TEXT;
 $text_en = <<<TEXT
-<p>...................................................</p>
+<p>the Portal's "Perestroika" - a service for quick search, combining <b>customers</b>
+and <b>contractors</b>, suppliers of equipment, materials,
+specialized equipment associated with the redevelopment of premises,
+reconstruction of buildings and structures. </p>
+
+<p>In this project, we made a sectoral segmentation of the market of building services
+in order to simplify the search system for clients of the specialized types of work
+associated with the various stages of design modifications, the surrounding residential,
+industrial and social sectors, buildings and structures.</p>
+
+<p>the Need to "restructure" the existing space to improve,
+optimization or functional changes, occurs daily.</p>
+
+<p>We offer twelve specialized sections including <b>diamond
+the concrete cutting, demolition, remodeling, renovation, design and
+other</b>, in which you can do <a>purchase order</a> or <a>Express yourself</a>
+as a professional in the following areas. </p>
 <p><?= Html::a('read more about the website',['about']) ?></p>
 
 TEXT;

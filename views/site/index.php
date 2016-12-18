@@ -58,7 +58,10 @@ $i = 1 ;
 
       $p1 = Html::tag('p', $wdTextPiece) ;
       $div1 = Html::beginTag('div') . $p .$img . $p1 . Html::endTag('div') ;
-      $a = Html::beginTag('a',['href'=>'#','title'=>'this is refer','data-toggle'=>"modal",'data-target'=>"#myModal"]) .$div1 . Html::endTag('a') ;
+//      $a = Html::beginTag('a',['href'=>'#','class'=>'for-click','title'=>'this is refer','data-toggle'=>"modal",'data-target'=>"#myModal"]) .$div1 . Html::endTag('a') ;
+      $a = Html::beginTag('a',['href'=>'#','class'=>'for-click','title'=>'this is refer',
+              'onclick' => 'wdOnClick("'. $wdId . '")','data-toggle'=>"modal",'data-target'=>"#myModal"]) .$div1 . Html::endTag('a') ;
+
       return $a ;
   }
   $totalText = '' ;
@@ -82,6 +85,7 @@ $i = 1 ;
 $totalText .=  Html::endTag('div') . Html::endTag('div') ;
 echo $totalText ;
 ?>
+
 </div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -92,20 +96,13 @@ echo $totalText ;
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">войти</h4>
             </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputName">Имя</label>
-                        <input type="text" class="form-control" id="exampleInputName" placeholder="Имя">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">пароль</label>
-                        <input type="password" class="form-control" id="exampleInputEmail1" placeholder="пароль">
-                    </div>
-                    <button type="submit" class="btn btn-default" data-dismiss="modal">войти</button>
-                    <button type="submit" class="btn btn-default" data-dismiss="modal">регистрация</button>
-                </form>
-
+            <div class="modal-body" id="modal-body">
+                <div id="modal-insert">
+                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
             </div>
         </div>
     </div>

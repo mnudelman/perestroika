@@ -64,6 +64,9 @@ class PageItems {
         return $result ;
     }
     private function getLang() {
+        if (isset($_SESSION['lang'])) {
+            Yii::$app->language = $_SESSION['lang'] ;
+        }
         $arr = explode('-',Yii::$app->language) ;
         return $arr[0] ;
     }
