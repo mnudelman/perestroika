@@ -42,9 +42,41 @@ $textRu = <<<TEXT
 
 TEXT;
 $textEn = <<<TEXT
-<h2>Design work<h2>
-........................................
-........................................
+Design work for the construction of structures and buildings is a key area of industrial and civil construction.
+Federal portal "Restructuring" brings together thousands of companies from all over the country, offering design-budget work,
+survey, maintenance of project documentation. Here you can specify the deadline and request price works.
+
+The scheme of "Restructuring" is simple: you register, select one of the key areas —
+creation of conceptual design, architectural solutions, design, systems engineering, private construction,
+buildings civil and industrial use, steel and structural elements of buildings and just click on "Find a contractor".
+Why design work order for "Restructuring".
+
+We carefully select the companies-contractors in the scope of the project and Refine the actual possibility of their implementation,
+availability of special tools, the number of previously completed projects and personnel of engineers and technicians.
+Determine the cost of design work — what does it comprise, what factors have the greatest impact.
+Here you may enjoy creating and designing:
+
+- conceptual design;
+ - architectural and construction solutions;
+- design of engineering systems;
+- private construction, buildings, civil and industrial purposes;
+- steel and structural elements of buildings.
+
+Matters and specificity of a contractor is how well he develops the design and estimate documentation,
+leads project and research work. It is no secret that the big companies own all directories on
+project activities that allow us to calculate specific terms of reference with
+accurate to the penny, and the rationale of the whole process.
+How to choose a contractor for design work?
+
+After using the Federal project "Restructuring," have you received a lot of feedback,
+it is necessary to discuss with contractors the specific design work. Price, execution time, level of training and
+the possibility of combining different directions. Ask about the presence of engineering-technical workers —
+designers, quantity surveyors, specialists in PGS.
+
+If possible, take reference prices of the base project work and, at least approximately,
+calculate the objective value. Please find out in advance the price of work of a particular company and
+compare the currently under way with the special literature. Ask to sign a strict contract and remember:
+the project "Rebuilding" only brings the customer and the contractor, and control is vested entirely on you.
 TEXT;
 
 $pieceText = [

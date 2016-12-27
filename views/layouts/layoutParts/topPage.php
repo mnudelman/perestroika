@@ -8,9 +8,10 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use app\service\PageItems ;
 use yii\bootstrap\Modal ;
-
+use yii\widgets\ActiveForm ;
+use app\models\LoginForm ;
+use app\service\PageItems ;
 ?>
 <?php
   $labelTab = PageItems::getItemText(['topMenu']) ;
@@ -22,6 +23,11 @@ use yii\bootstrap\Modal ;
   $urlEn = Url::to([$currentController.'/language','ln'=>'en']) ;
   $urlRu = Url::to([$currentController.'/language','ln'=>'ru']) ;
   $modalUrl = Url::to([$currentController,'#'=>'myModal']) ;
+  $langImages = PageItems::getItemAttr('',['topMenu','images']) ;
+  $langImageRu = 'images/ru.png' ;
+  $langImageEn = 'images/en.png' ;
+  $userIsGuest = Yii::$app->user->isGuest ;
+  $userName = ($userIsGuest) ? $labelTab['user-noname'] : Yii::$app->user->identity->username ;
 ?>
 
 <div class="wrap">
@@ -31,6 +37,33 @@ use yii\bootstrap\Modal ;
             'class' => 'navbar-default navbar-fixed-top',
         ],
     ]);
+      $img = Html::img($langImage ,
+          ['class'=>'img-responsive','alt'=>'выбор языка']) ;
+      // заголовок  dropdown
+      $a = Html::beginTag('a',
+               ['class' => 'dropdown-toggle',
+               'data-toggle' => "dropdown", 'href' => "#",
+               'role' => "button", 'aria-haspopup' => "true",'aria-expanded'=>"false"])  . $img .
+                 '<span class="caret"></span>' . Html::endTag('a') ;
+    // тело dropdown
+    $imgRu = Html::img($langImageRu ,['class'=>'img-responsive']) ;
+    $imgEn = Html::img($langImageEn ,['class'=>'img-responsive']) ;
+
+    // li - ru
+    $aRu = Html::beginTag('a', ['href' => $urlRu ]) . $imgRu . $labelTab['lang-russian'] . Html::endTag('a') ;
+    $liRu = Html::beginTag('li',['class' => "enabled"]) . $aRu . Html::endTag('li') ;
+    //
+     // li - en
+    $aEn = Html::beginTag('a', ['href' => $urlEn ]) . $imgEn . $labelTab['lang-english'] . Html::endTag('a') ;
+    $liEn = Html::beginTag('li',['class' => "enabled"]) . $aEn . Html::endTag('li') ;
+    //
+    $ulDropdownMenu = Html::beginTag('ul',['class' => "dropdown-menu"]) . $liRu . $liEn .Html::endTag('ul') ;
+    $liTotalDropdown = Html::beginTag('li',['class' =>"dropdown", 'role' => "presentation"]) . $a . $ulDropdownMenu .
+                       Html::endTag('li') ;
+    $enable = (!$userIsGuest) ? 'enable' : 'disabled' ;
+    $aForum = Html::beginTag('a', ['href' => 'forum/index']) . $labelTab['forum'] . Html::endTag('a') ;
+    $liForum = Html::beginTag('li',['class' => $enable, 'id' => 'topmenu-forum']) . $aForum . Html::endTag('li') ;
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-left'],
         'items' => [
@@ -38,56 +71,78 @@ use yii\bootstrap\Modal ;
             ['label' => $labelTab['about'], 'url' => ['/about/index']],
             ['label' => $labelTab['order'], 'url' => ['/order/index']],
             ['label' => $labelTab['developers'], 'url' => ['/developer/index']],
-            ['label' => $labelTab['forum'], 'url' => ['/forum/index']],
-            '<li role="presentation" class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        <img src="'. $langImage .'"  class="img-responsive" alt="russian language">
-        <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-        <li class="enabled"><a href="'.    $urlRu   .'">
-        <img src="images/ru.png" class="img-responsive" alt="russian language"> '.$labelTab['lang-russian'] .
-        '</a></li>
-        <li class="enabled"><a href="'.    $urlEn   .'">
-        <img src="images/en.png" class="img-responsive" alt="english language">' .$labelTab['lang-english'] .
-        '</a></li>
-    </ul>
-  </li>',
+            $liForum,
+            $liTotalDropdown,
         ],
     ]);
+
+ // сборка  dropdown
+
+    // заголовок  dropdown
+    $a = Html::beginTag('a',
+            ['class' => 'dropdown-toggle',
+                'id' => '',
+                'data-toggle' => "dropdown", 'href' => "#",
+                'role' => "button", 'aria-haspopup' => "true",'aria-expanded'=>"false"])  .
+        '<i class="fa fa-user"></i>&nbsp;&nbsp;' .'<span id="topmenu-username">' . $userName .'</span>' .
+        '<span class="caret"></span>' . Html::endTag('a') ;
+    // тело dropdown
+    // li - entr
+    $enable = ($userIsGuest) ? 'enable' : 'disabled' ;
+    $aEnter = Html::beginTag('a', ['href' => '#','data-toggle'=>"modal",'data-target'=>"#enter-form" ]) .
+        $labelTab['enter'] . Html::endTag('a') ;
+    $userIsGuestParam = ($userIsGuest) ? '1' : '0' ;
+    $liEnter = Html::beginTag('li',['class' => $enable,'id'=> 'topmenu-enter',
+        'onClick' => 'enterTargetControl(' . $userIsGuestParam . ')']) . $aEnter . Html::endTag('li') ;
+    //
+    // li - registration
+    //'<li role="presentation" class="enabled"><a href="#"dal" data-target="#myModal">'.$labelTab['registration'].'</a></li>' .
+
+
+    $enable = ($userIsGuest) ? 'enable' : 'disabled' ;
+    $aRg = Html::beginTag('a', ['href' => '#','data-toggle'=>"modal",'data-target'=>"#registration-form"  ])  .
+        $labelTab['registration'] . Html::endTag('a') ;
+    $liRg = Html::beginTag('li',['class' => $enable,'id'=> 'topmenu-registration',
+        'onClick' => 'enterTargetControl(' . $userIsGuestParam . ')']) . $aRg . Html::endTag('li') ;
+    //
+
+    // li - profile
+    $enable = (!$userIsGuest) ? 'enable' : 'disabled' ;
+    $aProfile = Html::beginTag('a', ['href' => '#' ]) .  $labelTab['profile'] . Html::endTag('a') ;
+    $liProfile = Html::beginTag('li',['class' => $enable,'id'=> 'topmenu-profile']) . $aProfile . Html::endTag('li') ;
+    //
+
+    // li - office
+    $enable = (!$userIsGuest) ? 'enable' : 'disabled' ;
+    $aOffice = Html::beginTag('a', ['href' => '#' ]) .  $labelTab['office'] . Html::endTag('a') ;
+    $liOffice = Html::beginTag('li',['class' => $enable,'id'=> 'topmenu-office']) . $aOffice . Html::endTag('li') ;
+    //
+
+    $ulDropdownMenu = Html::beginTag('ul',['class' => "dropdown-menu"]) .
+        $liEnter . $liRg . $liProfile . $liOffice .Html::endTag('ul') ;
+    $liTotalDropdown = Html::beginTag('li',['class' =>"dropdown", 'role' => "presentation"]) . $a . $ulDropdownMenu .
+        Html::endTag('li') ;
+
+
+
+
+
+
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-//            ['label' => 'Login', 'url' => ['/site/login']],
-            '<li role="presentation" class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-user"></i>' . $labelTab['user-noname'] . ' <span class="caret"></span>
-    </a>' .
-    '<ul class="dropdown-menu">' .
-
-          '<li></li><button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal"
-                            style="background-color: rgba(0,0,0,0); border: none; font-size: 14px; padding-top: 17px;">
-                                ВОЙТИ
-                    </button> </li>' .
-
-
-        '<li role="presentation" class="enabled"><a href="#" data-toggle="modal" data-target="#myModal">'.$labelTab['registration'].'</a></li>' .
-        '<li role="presentation" class="disabled"><a href="#">'.$labelTab['profile'].'</a></li>' .
-        '<li role="presentation" class="disabled"><a href="#">'.$labelTab['office'].'</a></li>' .
-    '</ul>
-  </li>',
+        'items' => [ $liTotalDropdown,
         ],
     ]);
-
-
     NavBar::end();
     ?>
+
     <div>
         <nav class="navbar navbar-default" style="margin-top:60px">
             <div class="container-fluid">
                 <div class="row" style="background-color: white;">
                     <div class="navbar-header">
-                        <a href="/site/index">
+                        <a href="site/index">
                             <img alt="Brand" class="image-logo" src="images/logo.jpg">
                         </a>
                     </div>
@@ -99,11 +154,8 @@ use yii\bootstrap\Modal ;
 
 
 <?php
-Modal::begin([
-'header' => '<h2>Hello world</h2>',
-'toggleButton' => ['label' => 'click me'],
-]);
+//$model = new LoginForm() ;
+//$this->title = 'myLogin' ;
+//$this->render('login') ;
+?>
 
-echo 'Say hello...';
-
-Modal::end();

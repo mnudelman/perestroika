@@ -64,8 +64,8 @@ if (isset($_SESSION['lang'])) {
     <div class="container">
         <?= $content ?>
     </div>
-
-
+<?=$this->render('layoutParts/login') ;?>
+<?=$this->render('layoutParts/registration') ;?>
 <?=$this->render('layoutParts/footerPart')?>
 
 

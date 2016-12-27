@@ -12,14 +12,14 @@ $content = [
             'ru' => 'Алмазная резка и бурение',
             'en' => 'Diamond cutting and drilling'
         ],
-        'img' => 'алмазная резка и бурение.jpg' ,
+        'img' => 'алмазная резка и бурение.jpg',
     ],
     'demolition' => [
         'text' => [
             'ru' => 'Демонтажные работы',
             'en' => 'Demolition work'
         ],
-        'img' => 'Демонтажные работы.jpg' ,
+        'img' => 'Демонтажные работы.jpg',
     ],
     'dismantling' => [
         'text' => [
@@ -95,9 +95,33 @@ $content = [
     ],
 
 ];
+$commands = [
+    'order' => [
+        'text' => [
+            'ru' => 'заказ',
+            'en' => 'order'],
+    ],
+    'developer' => [
+        'text' => [
+            'ru' => 'добавить в исполнители',
+            'en' => 'add to developer',],
+    ],
+    'exit' => [
+        'text' => [
+            'ru' => 'выход',
+            'en' => 'exit',],
 
-return [
-    'title'   => ['text' => $title],
-    'content' => $content,
-
+    ]
+];
+$url = [
+    'order' => 'order%2Findex',
+    'developer' => 'developer%2Findex',
+    'exit' => '#'
 ] ;
+return [
+    'title' => ['text' => $title],
+    'content' => $content,
+    'commands' => $commands,
+    'url' => $url,
+
+];

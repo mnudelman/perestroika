@@ -44,9 +44,43 @@ $textRu = <<<TEXT
 
 TEXT;
 $textEn = <<<TEXT
-<h2>Suppliers of equipment and consumables for diamond cutting and drilling</h2>
-................................................................................
-................................................................................
+Diamond cutting is an important step in the dismantling of buildings and structures, allowing you to quickly and efficiently separate structural elements.
+With all the richness of technical solutions and tools, the technique is similar: cut with the disk,
+rope or drill bit (diamond core bits) with a carbon coating, similar in structure to a real diamond.
+
+This instrument, in fact, no matter what to destroy. In the list of proposals of the Federal portal "Perestroika"
+diamond concrete cutting rope, diamond wire, reinforced with special drills.
+ He's dealing with very hard materials like reinforced concrete and relatively fragile:
+bricks, concrete blocks, stone-savage.
+A wealth of choice from the "Perestroika".
+
+Recourse to the Federal project "Restructuring", it is important to determine what type of work or services you require.
+In addition to direct diamond cutting, here you can find a team with equipment for diamond cutting
+to book a rental stenobitnyh machines, floor saws seams and electric carvers
+as well as the manufacture of diamond bits for stone cutting drilling.
+We ordered:
+
+ - rent stenobitnyh machines and floor saws seams;
+- installation of diamond drilling in reinforced concrete;
+- fabrication and installation of the diamond bits;
+- diamond blades, ropes, strings and related materials;
+- services of diamond cutting and drilling concrete.
+
+Diamond cutting is an integral part of the mounting and dismantling of buildings and structures and redevelopment areas.
+It is reflected in the project work (the price proposed by the contractor),
+but it requires special training of staff, so self-cutting or drilling is highly undesirable.
+Remember: safety is the primary!
+How to choose a contractor for diamond cutting?
+
+Leaving the Federal project "Rebuilding" the application and receiving feedback — whether it's cutting with diamond wire or disk
+ask how long the contractor specializiruetsya on this type of work.
+Is there any specialized education, the operators of diamond cutting and access to technology.
+Do not hesitate to ask a question about the cost of the diamond cutting and factors of cost.
+
+The blame for damage to major structures lie on the contractor, but the responsibility to the customer has not been removed.
+Before you order diamond cutting, contact the designers in the field of PGS, they will conduct the necessary measurements and calculations
+in order to avoid excesses in the course of the work.
+And remember: cutting of concrete or stone the diamond tool best left to professionals!
 TEXT;
 
 $pieceText = [

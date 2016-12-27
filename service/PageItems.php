@@ -49,7 +49,9 @@ class PageItems {
     private function getMap($sourceTab,$attrKey,$lang = null) {
         $result = [] ;
         foreach ($sourceTab as $key => $attrValue) {
-            if (isset($attrValue[$attrKey])) {
+            if (empty($attrKey)) {
+                $result[$key] = $attrValue ;
+            } elseif (isset($attrValue[$attrKey])) {
                 $val = (is_null($lang)) ? $attrValue[$attrKey] : $attrValue[$attrKey][$lang] ;
                 if (!is_null($val)) {
                     $result[$key] = $val ;

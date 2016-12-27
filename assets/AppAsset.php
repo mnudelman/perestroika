@@ -49,11 +49,11 @@ class AppAsset extends AssetBundle
 //        'css/bootstrap.min.css',
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
 //        'css/font-awesome.min.css',
-        'css/prettyPhoto.css',
-        'css/price-range.css',
-        'css/animate.css',
-//        'css/main.css',
-        'css/responsive.css',
+//        'css/prettyPhoto.css',
+//        'css/price-range.css',
+//        'css/animate.css',
+        'css/main.css',
+//        'css/responsive.css',
     ];
     public $js = [
 //        'js/jquery.js',

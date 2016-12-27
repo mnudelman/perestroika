@@ -42,9 +42,42 @@ $textRu = <<<TEXT
  каков срок службы водителей и механиков и в каком состоянии находится специальная техника.
 TEXT;
 $textEn = <<<TEXT
-<h2>Rent special vehicles</h2>
-...................................................
-...................................................
+Federal portal "Restructuring" aims to satisfy all the requests of the citizens in the field of construction, finishes, installation,
+recovery and dismantling of buildings and structures. In addition to the acquisition of materials, concrete, steel structures and concrete
+we offer rental of special transport resources (and without) to work on site.
+
+The search algorithm is designed so that the user can accurately specify the type of the desired vehicle.
+This excavators, cranes, bulldozers, cranes, aerial platforms, compressors, concrete pumps, mixers, equipment for
+ diamond concrete cutting and drilling. In the framework of "Perestroika" is present in almost all of the machinery for construction.
+Renting construction equipment in the "Restructuring."
+
+Choosing the specific type of equipment, the user specifies when they need a service –
+for urgent requests there is a mark "Right now." At the same time you can select multiple positions
+or describe the application and offer the landlord construction equipment and to determine the amount and type of work.
+Often experienced professionals accurately determine scope of work "by eye".
+On "Restructuring" lease:
+
+ - caterpillar construction equipment;
+- wheeled construction equipment;
+compressor and generator sets;
+- high rise mixers and concrete pumps;
+- equipment for cutting and drilling.
+
+To restrict incoming requests in the "job Description" specifies the city, the location of the object,
+the scope of work and desired cost. In contrast, when the user intends to obtain the maximum amount of offers
+the rental of special equipment, he has the right to write "I will consider your offer."
+It's a real choice at a fair price.
+How to rent machinery for construction?
+
+Russian project "Perestroika" recommends to start with the invitation of the engineers of industrial and civil construction,
+who will conduct the measurements and prepare the project. Next, the user requests the price of the work to subcontractors,
+on the basis of their competence and technical capabilities. Special equipment is rented on the basis of list of works
+submitted to the technical worker.
+
+When the equipment works on installation-dismantling of structures and buildings,
+also important is the presence of civil engineering – of course, if the customer does not have great knowledge in this matter.
+Before signing a lease agreement you need to clarify what projects have been conducted,
+what is the lifespan of the drivers and mechanics and what is the status of special equipment.
 TEXT;
 
 $pieceText = [

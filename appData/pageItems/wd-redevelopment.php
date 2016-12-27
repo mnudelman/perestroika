@@ -39,9 +39,39 @@ $textRu = <<<TEXT
 как давно действует компания, каковы успешные проекты, с какими трудностями сталкиваются граждане и чем именно им можно помочь.
 TEXT;
 $textEn = <<<TEXT
-<h2>Redevelopment of premises</h2>
-................................................
-................................................
+Thinking about redevelopment areas, can not do without professionals who are familiar with the requirements of the BTI, SanPiN, SNiP,
+a different regulatory framework. Fortunately, the Federal portal "Restructuring" knows all about the layout and help you choose
+best option for price, quality and volume of services. Because most industry professionals are here!
+
+Creating a request through the project, you choose one of several key areas:
+design of openings in bearing walls, foundations or slabs,
+harmonization of redevelopment of residential and non-residential premises,
+translation premises in uninhabited Fund,
+receiving technical advice for approval of redevelopment and the full range of associated works.
+Why redevelop bought a "Restructuring"?
+
+Any action with bearing walls and partitions that alter the original dimensions of the premises,
+must be negotiated and usacheverse BTI — Bureau of technical inventory.
+Otherwise, the Supervisory body will go to court to demand the restoration of walls and partitions.
+In some cases when transferring to non-residential premises — without the help of the works not proceed.
+Here you will order:
+
+ - design of openings in slabs, foundations or bearing walls;
+- harmonization of redevelopment of non-residential premises and residential;
+- translation of the premise or the whole building to non-residential Fund;
+technical conclusion BTI to carry out works associated with the redevelopment;
+- the whole complex of construction works associated with the redevelopment.
+
+The draft took account of all. It is the purpose of the premises, the term of translation into non-residential category
+the technical capabilities of the bearing walls and even the size of the doorway.
+The technical features difficult even for a trained technician
+ not to mention the multitude of conflicting advice from the Internet. There is a solution: book the redevelopment of premises
+through the Federal project "Rebuilding".
+Employ specialists to redevelop?
+
+In Russia there are tens of thousands of artists involved in the redevelopment of premises, translation of non-residential sector and the legalization of the BTI.
+The specialists of "Realignment" associated with each of the contractors and clarifies
+how long the company operates, what are the successful projects, what are the difficulties citizens face and what they can help.
 TEXT;
 $pieceText = [
     'text' => [

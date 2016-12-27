@@ -43,9 +43,43 @@ $textRu = <<<TEXT
 а федеральный проект «Перестройка» в этом поможет!
 TEXT;
 $textEn = <<<TEXT
-<h2>Suppliers of specialised building materials</h2>
-....................................................
-....................................................
+Federal portal "Restructuring" pays attention not only to the construction team — contractors in the construction,
+repair and dismantling of buildings and structures — but related goods and services.
+One of the important directions is the supply of specialized building materials, anchors, mortar,
+steel structures and concrete products.
+
+In the Russian Federation there are a large number of enterprises in the construction sector
+ready to deliver or to ship products across the country.
+Dry chemical compounds, which can be bought in Vladivostok or Kaliningrad
+ supplied from the factories in the Sverdlovsk region, Perm region and Yakutia.
+We propose to delete the logistics of communication and to purchase materials directly.
+What we offer specialised building materials?
+
+Almost everything. Asking search for "anchor fasteners", you will get reviews suppliers of chemical anchor, simple,
+spacer, wedge, drop-in. Dry building mixes is a segment where there are decoration materials,
+the finish, for concrete waterproofing, protection of steel structures, onebusaway wood, other areas of construction.
+At the Federal project "the Rebuilding" order:
+
+- the anchor fasteners;
+- metal construction;
+- concrete and concrete products;
+- dry building mixes;
+the metal and its manufacture.
+
+Delivery of concrete from the manufacturer will allow you to select the most advantageous proposal, taking into account the location, volume and quality.
+The situation is similar with metal, which you can buy from thousands of suppliers from all over the country.
+At the Federal project "Restructuring" you may choose ready-made products, and metal products "to order",
+on the basis of the generated needs.
+How to choose a supplier of construction materials.
+Ask how long the company operates in the production of concrete, metal, dry mixes.
+What projects have been implemented, what is the volume of recommendations and complaints.
+Specify whether the production of its own technology, produced the franchise or under contract?
+Be sure to check the availability of own capacities.
+
+Taking the discussion of deliveries of building materials from another city or subject of the country, specify the cost of shipping and
+the cost of the logistics of the shoulder. After all, if the anchors or steel long delivery will not hurt
+mixer with concrete needs to spend on the road no more than two hours. Necessarily require the conclusion of a contract is
+a Federal project "Perestroika".
 TEXT;
 $pieceText = [
     'text' => [

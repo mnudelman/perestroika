@@ -29,4 +29,7 @@ if (isset($_GET['r']) &&
 }
 //(new yii\web\Application($config))->run();
 $app = new yii\web\Application($config) ;
+if (isset($_SESSION['language'])) {
+    $app->language = $_SESSION['language'] ;
+}
 $app->run() ;

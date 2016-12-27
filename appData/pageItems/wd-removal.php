@@ -43,10 +43,44 @@ $textRu = <<<TEXT
 
 TEXT;
 $textEn = <<<TEXT
-<p2>Removal and disposal of construction debris'</p2>
-.....................................................
-.....................................................
+Removal of construction wastes and their disposal is an integral part of any project associated with the erection or dismantling
+of buildings and structures. Looking for reliable crews, we are ready to sort out the Internet and interviewing friends.
+Meanwhile, enjoy the garbage can on the Federal portal "Perestroika",
+which is one of the key activities.
+
+Until recently, disposal of solid waste and construction debris was not an easy task: had to buy bags,
+shovels, brooms, pelegrinos search truck and tractor, to negotiate with the landfill.
+ Today enough to leave a request for the provision of services for garbage collection after the construction work and select the best offer.
+Why garbage book on "Restructuring".
+
+First, the Federal portal "Restructuring" brings together companies from across the country,
+daily disposal of thousands of tons of debris. Second, the convenient search allows
+to choose a contractor from your region and city. Thirdly, a flexible system of creating order –
+with comments and desired price – allows you to make the best choice at a fair price.
+Order your garbage disposal by:
+
+ - heavy trucks – MAZ, KAMAZ;
+- compact Gazelles and foreign cars;
+- mobile container and boxes;
+- synthetic bags and packages;
+- Autonomous crushing plant.
+
+We pay great attention to the quality of services – whether garbage collection, KAMAZ, GAZelle,
+mobile container or by crushing mobile installation.
+Professional teams always come with their own equipment and supplies.
+Thanks to the "Restructuring" you don't have to worry about the safety specialists regularly pass.
+How to choose a team for garbage collection?
+
+Ask how long the company works on garbage removal and recycling construction waste,
+what equipment or special technique has which projects they were previously involved staff.
+Be sure to check the passage of the safety and availability of the engineer on TB in the company –
+this will indicate the quality of services and use of PPE.
+
+Get works engineer of industrial and civil construction (you can order the service on the "Restructuring").
+You will be able to professionally determine the price of the works and understand how much one or the other procedure.
+ Sign a contract with the service description for the removal and disposal of construction waste and remember: the quality depends on your control.
 TEXT;
+
 $pieceText = [
     'text' => [
         'ru' => 'Вывоз строительных отходов и их утилизация – неотъемлемая часть любого проекта, связанного с возведением или демонтажем

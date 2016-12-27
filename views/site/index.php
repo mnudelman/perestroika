@@ -22,8 +22,8 @@ $introContent = $introTab['content'];
 $wdTitle = PageItems::getItemText(['wd-list','title']) ;
 $wdItems = PageItems::getItemText(['wd-list','content']) ;
 $wdImages = PageItems::getItemAttr('img',['wd-list','content']) ;
-
-
+$wdCommandLabel = PageItems::getItemText(['wd-list','commands']) ;
+$wdUrl = PageItems::getItemAttr('',['wd-list','url']) ;
 $i = 1 ;
 ?>
 <div class="umb-grid">
@@ -32,7 +32,7 @@ $i = 1 ;
             <div class='container'>
                 <div class="row clearfix">
                     <div class="col-md-12 column">
-                        <div>
+                        <div class="text-description">
                             <h3 class="header-title" ><?=$introTitle?></h3>
                             <?=$introContent?>
                         </div>
@@ -46,21 +46,21 @@ $i = 1 ;
 
 <br/>
 <!--</div>-->
-<h3 class="header-title" style="text-align: center;"> <?=$wdTitle['text']?> </h3>
+<h3 class="header-title page-title" > <?=$wdTitle['text']?> </h3>
 <div class="container">
 <?php
   function wdItemBuild($wdId,$wdCap,$wdImg,$wdTextPiece) {
-      $pTitle = '<strong>' . $wdCap .'</strong>' ;
-      $p = Html::tag('p', $pTitle) ;
+      $pTitle =  $wdCap ;
+      $p = Html::tag('p', $pTitle,['class' => 'wd-text-title']) ;
       $img = Html::img('@web/images/' . $wdImg ,
           ['class'=>'img-responsive img-thumbnail','alt'=>'this is picture']) ;
       $div=Html::tag('div',$img);
 
-      $p1 = Html::tag('p', $wdTextPiece) ;
+      $p1 = Html::tag('p', $wdTextPiece,['class' => 'wd-text']) ;
       $div1 = Html::beginTag('div') . $p .$img . $p1 . Html::endTag('div') ;
 //      $a = Html::beginTag('a',['href'=>'#','class'=>'for-click','title'=>'this is refer','data-toggle'=>"modal",'data-target'=>"#myModal"]) .$div1 . Html::endTag('a') ;
-      $a = Html::beginTag('a',['href'=>'#','class'=>'for-click','title'=>'this is refer',
-              'onclick' => 'wdOnClick("'. $wdId . '")','data-toggle'=>"modal",'data-target'=>"#myModal"]) .$div1 . Html::endTag('a') ;
+      $a = Html::beginTag('a',['href'=>'#','title'=>'this is refer',
+              'onclick' => 'wdOnClick("'. $wdId . '")','data-toggle'=>"modal",'data-target'=>"#wd-description"]) .$div1 . Html::endTag('a') ;
 
       return $a ;
   }
@@ -88,21 +88,25 @@ echo $totalText ;
 
 </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="wd-description" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">войти</h4>
+                <h4 class="modal-title" id="wd-modal-title">войти</h4>
             </div>
             <div class="modal-body" id="modal-body">
-                <div id="modal-insert">
+                <div id="wd-modal-insert" class="wd-text">
                  </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+            <p>
+<!--                <button type="button" class="btn btn-default" data-dismiss="modal">Заказ</button>-->
+                <a class="btn btn-default" href="<?=$wdUrl['order']?>" role="button" data-dismiss="modal" ><?=$wdCommandLabel['order'] ?></a>
+                <a class="btn btn-default" href="<?=$wdUrl['developer']?>" role="button" data-dismiss="modal"><?=$wdCommandLabel['developer'] ?></a>
+                <a class="btn btn-default" href="#" role="button" data-dismiss="modal"><?=$wdCommandLabel['exit'] ?></a>
+            </p>
             </div>
         </div>
     </div>

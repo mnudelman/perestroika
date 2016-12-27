@@ -28,7 +28,27 @@ $textRu = <<< TEXT
 
 TEXT;
 $textEn = <<< TEXT
- .................   Demolition work    ...............
+ Search for specialists that can quickly and efficiently carry out demolition works, can take months.
+Besides the special equipment, the master must have education in the field of mounting and Dismounting,
+to comply with safety regulations and offer a fair price, corresponding quantity and quality of planned works.
+
+The price of dismantling the bearing walls varies with the cost of concrete
+and the demolition of the old Foundation is not comparable with the dismantling of the roof.
+When choosing a contractor it is important to accurately determine the amount of dismantling (wall or window) and determine the price range.
+ But the higher the cost of dismantling is not a guarantee of higher quality works.
+How to choose a contractor for demolition?
+
+Note the number of the realized projects on construction and dismantling
+the tools, the number of people in the construction team,
+the presence of a foreman, craftsman, engineer, industrial civil construction.
+They often spetsializiruyutsya on one or two types of works dismantling of roof, Windows or the entire apartment.
+On "Restructuring" order of dismantling:
+
+- old foundations;
+- load-bearing walls and partitions;
+ - floor and ceiling coverings;
+roof, Windows and apartments;
+- steel and concrete.
 TEXT;
 
 $pieceText = [

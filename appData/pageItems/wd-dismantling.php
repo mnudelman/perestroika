@@ -39,7 +39,36 @@ $textRu = <<<TEXT
 TEXT;
 
 $textEn = <<<TEXT
-<h2> Dismantling of buildings and structures </h2>
+Federal project "Restructuring" brings together tens of thousands of customers and performers from across the country.
+Puzzled by search crews on installation-dismantling of buildings and structures, you can explore hundreds of sites in search
+the most favourable rate of removal. Price plays an important role, but the choice depends on the quality, speed of work and
+technical training team.
+
+Demolition of load-bearing walls, as well as the old Foundation, by specialists in the field of industrial and
+civil engineering. Often users request the price of the work and find out that it was illustrative —
+ certain demolition work the contractor shall not be. Not to be in such a situation,
+better to use the project "Rebuilding".
+Why the dismantling of buildings and structures bought in the "Perestroika"?
+
+Construction companies, leading to the dismantling of buildings, subjected to severe tests in our project.
+On "Restructuring" order the removal of buildings and structures:
+
+-by hand — up to three floors;
+-excavators — height three stories;
+-hydraulic hammers, mini excavators;
+-blasting with specialists;
+-elektrolesovskaya for steel structures.
+
+Dismantling of buildings is a specific field that requires significant practical and theoretical training.
+Often small companies specializing in one or two types of demolition work, to undertake comprehensive services:
+the demolition of houses, the Assembly and dismantling of load-bearing walls or guaranteed to tear the house promptly.
+The project "the Restructuring" allows them to "cut off" in favor of really strong professionals.
+How to choose a contractor for dismantling of buildings and structures?
+
+Choose a contractor from our own or neighbouring cities — this will reduce the cost for
+the expense of the team and the delivery of the equipment. Please note the price of the work and compare it with other companies
+leading the Assembly and dismantling. Very low cost of dismantling must testify about the "pitfalls" in the process,
+and high — thinking about the justification of prices.
 TEXT;
 
 $pieceText = [

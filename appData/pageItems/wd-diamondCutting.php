@@ -30,7 +30,30 @@ $textRu = <<< TEXT
 TEXT;
 
 $textEn = <<< TEXT
-..........................................................................
+Diamond drilling (drilling), drilling in reinforced concrete structures :
+walls, ceilings, and foundations of various diameters,
+modern technology is passing materials.
+Designed for the installation of utilities,
+to ensure the full functioning of newly constructed or reconstructed buildings.
+The key difference and the uniqueness of the technology of diamond drilling
+is to obtain accurate holes, originally specified,
+geometric shapes (diameter ). and the required depth (thickness ) , pass-through or "blind" ,
+ depending on project tasks.
+When the technology of diamond drilling in perforated design,
+no impact forces , so, there is no breach or constructive loss (carrier )
+the ability of construction elements of buildings.
+Is eliminated (or reduced to an acceptable minimum) , the appearance of chips, cracks, vibration damage.
+Diamond drilling holes is a hollow metal crown (resembling a pipe)
+ on the one hand, which is the shank (designed for connection to the motor shaft, specify its rotation).
+And with the other brazed diamond segments , which carry out a cutting effect on partrimony material.
+The engine, which gives the rotation of the crown is fixed on the frame,
+providing precise control of the drilling process by the operator.
+Machines for non-impact passage of building structures. Referred to as installations of diamond drilling .
+Among themselves differ in engine power (affects the maximum and minimum hole diameter ),
+ type of drive motor (electric, hydraulic, pneumatic ) .
+Manual (for drilling small diameters
+( and an ancient dwelling (primary use ). and price category ,
+depending on the manufacturer and the various functional and ergonomic differences.
 TEXT;
 
 $pieceText = [

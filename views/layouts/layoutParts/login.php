@@ -9,16 +9,14 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm ;
 use app\models\LoginForm ;
-use app\models\UserRegistration ;
-use app\models\UserProfile ;
 
 ?>
 <?php
-$mdReg = new UserRegistration() ;
-$mdProf = new UserProfile() ;
-$title = 'myRegistration' ;
+$title = 'LOGIN' ;
+$model = new LoginForm() ;
+$this->title = 'myLogin' ;
 ?>
-<div class="modal fade" id="registration-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="enter-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -33,7 +31,7 @@ $title = 'myRegistration' ;
 
                         <?php
                         $form = ActiveForm::begin([
-                            'id' => 'registration-form',
+                            'id' => 'login-form',
                             'action' => '#',
                             'options' => ['class' => 'form-horizontal'],
                             'fieldConfig' => [
@@ -42,14 +40,12 @@ $title = 'myRegistration' ;
                             ],
                         ]); ?>
 
-                        <?= $form->field($mdReg, 'username')->textInput(['autofocus' => true]) ?>
-                        <?= $form->field($mdReg, 'password')->passwordInput() ?>
-                        <?= $form->field($mdReg, 'password_repeat')->passwordInput() ?>
-                        <?= $form->field($mdProf, 'email')->textInput() ?>
-                        <?= $form->field($mdProf, 'site')->textInput() ?>
-                        <?= $form->field($mdProf, 'company')->textarea() ?>
-                        <?= $form->field($mdProf, 'info')->textarea() ?>
+                        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
+                        <?= $form->field($model, 'password')->passwordInput() ?>
+
+                        <?= $form->field($model, 'rememberMe')->checkbox([
+                            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
                         ]) ?>
 
                         <div class="form-group">

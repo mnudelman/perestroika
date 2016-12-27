@@ -43,9 +43,43 @@ $textRu = <<<TEXT
 Благодаря этому реконструкция зданий и сооружений будет максимальной быстрой и удобной.
 TEXT;
 $textEn = <<<TEXT
-<h2>Reconstruction of buildings and structures</h2>
-...................................................
-...................................................
+Federal portal "Restructuring" reinforces the presence on the market of the country. Reconstruction of buildings and structures,
+the most popular different segments of the population, we have provided thousands of construction companies at various levels of work
+technical equipment and price policy. Creating the application project
+be confident in the proper selection and fair value.
+
+The direction of reconstruction works is quite specific. In addition to technical equipment, the construction crews and their experiences
+ it is important the presence of the engineer in industrial and civil construction, familiar with the characteristics of the structures and are able
+to calculate the load in different modes of operation. Not less significant experience in the legalization of redevelopment in the BTI and the state Inspectorate.
+Features of reconstruction of structures and buildings.
+
+Reconstruction — a synonym for "restoration with the return of structural integrity and purpose."
+In this regard, critical technical training of staff and previously completed projects.
+Affect established relations with the state bodies in the field of construction — depends on
+ how fast the building recovers and will be in operation.
+Ask for the "Restructuring":
+
+- survey of construction of buildings and structures;
+- coordination of reconstruction;
+- issue conclusions on the possibility of reconstruction;
+- obtaining a permit to operate the reconstructed object.
+- execution of complex renovation work.
+
+Often, professionals begin to work, not having developed the project of reconstruction of the building,
+that is a gross violation of town planning rules. Federal project "Perestroika" carefully selects contractors
+ stating the possibility of development of documentation for reconstruction of buildings and the amount of previously completed work.
+One goal: to offer you the best companies for the reconstruction of buildings from across the country!
+How to choose a team on reconstruction of the building.
+
+First of all, take advantage of the Federal project "Perestroika": select one of the key areas —
+the survey of construction of buildings and structures, coordination of reconstruction,
+issue conclusions on the possibility of reconstruction or execution of complex renovation work.
+Create an application, click "Find a contractor".
+
+Remember that the control over the quality of work, their speed and cost lies entirely on the customer
+here the portal "Restructuring" is a platform that brings together people from across the country.
+Ask for a contract reconstruction, project design and approvals, construction supervision and BTI.
+Due to this, reconstruction of buildings and structures will be maximum fast and convenient.
 TEXT;
 
 $pieceText = [
