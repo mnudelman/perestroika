@@ -12,27 +12,30 @@ use yii\db\ActiveRecord ;
 class UserProfile extends ActiveRecord {
     private $_userProfile = false ;
     private $_userId ;
+
+
     public static function tableName(){
-        return 'userprofile';
+        return   'userprofile';
     }
     public function rules()
     {
         return [
-            [['email,tel,company,info'],'required'],
+            [['email','tel','company','info'],'required'],
             ['email','email'],
             ['email', 'unique'],
             ['site','url'],
         ];
     }
     public function setUserId($userid) {
-        $this->_userId = $userid ;
+        $this->userid = $userid ;
     }
-    public function saveProfile($profileAttributes) {
-        $this->_userProfile = $this->getByUserId($this->_userId) ;
-        $this->_userProfile->attributes = $profileAttributes ;
-        if ($this->_userProfile->validate()) {
-            $this->_userProfile->save() ;
+    public function saveProfile() {
+        if ($this->validate()) {
+            return $this->save() ;
+        }else {
+            return false ;
         }
+
     }
     /**
      * Finds user by [[userid]]
@@ -41,10 +44,8 @@ class UserProfile extends ActiveRecord {
      */
     public function getByUserId($id)
     {
-        if ($this->_userProfile === false) {
-            $this->_userProfile = $this->findOne(['userid' => $id]) ;
-        }
+        $this->findOne(['userid' => $id]);
+        $this->userid = $id ;
 
-        return $this->_userProfile;
     }
 }

@@ -30,18 +30,20 @@ class UserController extends Controller
         $success = false;
         $modelRegistration = new UserRegistration();
         $modelProfile = new UserProfile();
+        $userRegAttr = (Yii::$app->request->post('UserRegistration')) ;
+        $modelRegistration->enterPassword_repeat = $userRegAttr['enterPassword_repeat'] ;
         if ($modelRegistration->load(Yii::$app->request->post()) && $modelRegistration->saveRegistration()
              ) {
             $success = true;
             $loginForm = new LoginForm();
             $loginForm->username = $modelRegistration->username;
+            $loginForm->password = $modelRegistration->enterPassword;
             $loginForm->login();
 
             $user = $loginForm->getUser() ;
-
-            $profileAttributes = Yii::$app->request->post('UserProfile') ;
-            $modelProfile->saveProfile($profileAttributes) ;
-
+            $modelProfile->getByUserId($user->id) ;
+            $modelProfile->load(Yii::$app->request->post()) ;
+            $success = $success && $modelProfile->saveProfile() ;
 
 //            return $this->goBack();
         }
@@ -49,7 +51,7 @@ class UserController extends Controller
 //            'model' => $model,
 //        ]);
         $errors = [];
-        $errors = array($errors, $modelProfile->errors, $modelRegistration->errors);
+        $errors = array_merge( $modelProfile->errors, $modelRegistration->errors);
         if (Yii::$app->request->isAjax) {
             $query = Yii::$app->request->post();
             $message = (empty($errors)) ? ['oK!'] : $errors;

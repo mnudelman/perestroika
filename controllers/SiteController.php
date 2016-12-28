@@ -10,9 +10,11 @@ namespace app\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\UploadedFile ;
 use app\service\PageItems ;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
+use app\models\UploadForm;
 //use app\models\ContactForm;
 use app\controllers\BaseController ;
 
@@ -44,8 +46,13 @@ class SiteController extends BaseController
         ];
     }
 
-
-     /**
+    public function beforeAction($action){
+        if( $action->id == 'upload' ){
+            $this->enableCsrfValidation = false;
+        }
+        return parent::beforeAction($action);
+    }
+    /**
      * Displays homepage.
      *
      * @return string
@@ -143,5 +150,27 @@ class SiteController extends BaseController
 
         return $this->goHome();
     }
+    public function actionUpload()
+    {
+        $model = new UploadForm();
+        $success = false ;
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->upload()) {
+                // file is uploaded successfully
+                $success = true ;
+            }
+        }
+        if( Yii::$app->request->isAjax ){
+            $answ = [
+                'success' => $success ,
+                'message' => $model->errors,
+            ] ;
+            echo json_encode($answ) ;
 
+        }else {
+            return $this->render('index');
+            return $this->goBack();
+        }
+    }
  }
