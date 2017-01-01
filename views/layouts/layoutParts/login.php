@@ -58,8 +58,7 @@ $this->title = 'myLogin' ;
 
                         <?php ActiveForm::end(); ?>
 
-                        <div class="col-lg-offset-1" id="enterform-message" style="color:#999;">
-                            Заполните поля
+                        <div class="col-lg-offset-1" name="form-messages" style="color:#ff0000;">
                         </div>
                     </div>
 

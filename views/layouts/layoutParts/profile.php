@@ -98,11 +98,11 @@ $avatarImgName = (empty($avatarImgName)) ? 'peole.png' : $avatarImgName ;
                             </div>
                         </div>
                         <!---->
+                        <div class="col-lg-offset-1" name="form-messages" style="color:#ff0000;">
+                        </div>
+
                         <?php ActiveForm::end(); ?>
 
-                        <div class="col-lg-offset-1" id="userregistration-message" style="color:#999;">
-                            Заполните поля
-                        </div>
                     </div>
 
                 </div>

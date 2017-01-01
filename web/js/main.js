@@ -104,6 +104,7 @@ function loginOnClick() {
             "password": password
         }
     };
+    $('#login-form [name="form-messages"]').empty() ;
     $.ajax({
         url: 'index.php?r=site%2Flogin',
         data: {
@@ -137,11 +138,11 @@ function loginOnClick() {
                 $('#modal-exit').click();      // закрываем окно login-form
             } else {
 
-                $('#enterform-message').empty();
+                $('#login-form [name="form-messages"]').empty() ;
                 for (var rule in message) {
                     var messageText = message[rule];
                     for (var i = 0; i < messageText.length; i++) {
-                        $('#enterform-message').append(messageText[i] + '<br>');
+                        $('#login-form [name="form-messages"]').append(messageText[i] + '<br>');
                     }
                 }
             }
@@ -210,6 +211,7 @@ function registrationOnClick() {
             "avatar" : imgFile
         }
     };
+    $('#registration-form [name="form-messages"]').empty() ;
     $.ajax({
         url: 'index.php?r=user%2Fregistration',
         data: data,
@@ -219,7 +221,7 @@ function registrationOnClick() {
             var rr = JSON.parse(res);
             var success = rr['success'];
             var message = rr['message'];
-            if (rr['success'] === true) {
+            if (rr['successUser'] === true) {
                 $('#topmenu-logout').removeAttr('hidden') ;
                 $('#topmenu-enter').attr('hidden','hidden') ;
                 $('#topmenu-registration').attr('hidden','hidden') ;
@@ -229,29 +231,32 @@ function registrationOnClick() {
                 $('#topmenu-profile')[0].className = 'enable';
                 $('#topmenu-office')[0].className = 'enable';
                 $('#topmenu-username').text(userName);
-                $('#topmenu-avatar').attr('src',imgFilePath) ;
-
 
                 //$('#modal-exit').click();      // закрываем окно login-form
-                $('#userregistration-message').empty();
-                $('#userregistration-message').append('<strong>-----oK!------</strong>');
-            } else {
+                $('#userregistration-username').attr('readonly','readonly');
+                $('#userregistration-enterpassword').attr('readonly','readonly');
+                $('#userregistration-enterpassword_repeat').attr('readonly','readonly');
 
-                $('#userregistration-message').empty();
+                $('#registration-form [name="form-messages"]').append('Пользователь занесён в базу.<br>');
+            }
+            if ('successProfile') {
+                imgFilePath = $('#avatar-img').attr('src');
+                if (imgFilePath.length > 0) {
+                    $('#topmenu-avatar').attr('src', imgFilePath);
+                }
+            }
+
+
+            if (!success) {
+
                 for (var rule in message) {
                     var messageText = message[rule];
                     for (var i = 0; i < messageText.length; i++) {
-                        $('#userregistration-message').append(messageText[i] + '<br>');
+                        $('#registration-form [name="form-messages"]').append(messageText[i] + '<br>');
                     }
                 }
             }
-// переопределяем доступ ***
-//            console.log(res);
         },
-        //error: function () {
-        //    alert('Error!');
-        //}
-
         error: function (event, XMLHttpRequest, ajaxOptions, thrownError) {
             var responseText = event.responseText; // html - page
 
@@ -304,6 +309,7 @@ function profileOnClick(restorePrevious) {
             "avatar" : imgFile
         }
     };
+    $('#profile-form [name="form-messages"]').empty();
     $.ajax({
         url: 'index.php?r=user%2Fprofile',
         data: data,
@@ -327,16 +333,16 @@ function profileOnClick(restorePrevious) {
             if (rr['success'] === true) {
                 if (opcod !== 'get') {
                     $('#topmenu-avatar').attr('src', imgFilePath);
-                    $('#userprofile-message').empty();
-                    $('#userprofile-message').append('<strong>-----oK!------</strong>');
+                    $('#profile-form [name="form-messages"]').empty();
+                    $('#profile-form [name="form-messages"]').append('<strong>-----oK!------</strong>');
                 }
             } else {
 
-                $('#userprofile-message').empty();
+                $('#profile-form [name="form-messages"]').empty();
                 for (var rule in message) {
                     var messageText = message[rule];
                     for (var i = 0; i < messageText.length; i++) {
-                        $('#userprofile-message').append(messageText[i] + '<br>');
+                        $('#profile-form [name="form-messages"]').append(messageText[i] + '<br>');
                     }
                 }
             }

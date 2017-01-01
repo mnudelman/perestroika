@@ -13,7 +13,7 @@ use app\models\UserRegistration;
 use app\models\UserProfile;
 use app\models\UploadForm;
 use yii\widgets\Pjax;
-
+use app\service\PageItems ;
 ?>
 <?php
 $mdReg = new UserRegistration();
@@ -23,6 +23,16 @@ $title = 'myRegistration';
 $urlUpload = Url::to(['site/upload']) ;
 $uploadFormId = "upload-form" ;
 $avatarImgId = 'avatar-img' ;
+
+$titleTab = PageItems::getItemText(['user','forms','registrationForm','title']) ;
+$title = $titleTab['text'] ;
+$ruleTitleTab = PageItems::getItemText(['user','forms','registrationForm','rules','title']) ;
+$ruleTitle = $ruleTitleTab['text'] ;
+$ruleContentTab = PageItems::getItemText(['user','forms','registrationForm','rules','content']) ;
+$ruleContent = $ruleContentTab['text'] ;
+$buttonsTab = PageItems::getItemText(['user','buttons']) ;
+$uploadBt = $buttonsTab['upload'] ;
+$registrationBt = $buttonsTab['registration'] ;
 ?>
 
 <div class="modal fade" id="registration-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -50,13 +60,13 @@ $avatarImgId = 'avatar-img' ;
                         <div class="panel-heading" role="tab" id="headingOne">
                             <h4 class="panel-title">
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Please fill out the following fields to registration with rules:<span class="caret"></span>
+                                    <?=$ruleTitle ?><span class="caret"></span>
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div id="collapseOne" class="panel-collapse collapse in rule-content" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                <?=$ruleContent?>
                             </div>
                         </div>
                     </div>
@@ -110,8 +120,6 @@ $avatarImgId = 'avatar-img' ;
 
                 <div id="enter-modal-insert">
                     <div class="site-login">
-                        <p>Please fill out the following fields to login:</p>
-<!---->
                         <?php
                         $img = Html::img('@web/images/avatars/people.png'  ,
                             ['class'=>'img-responsive img-thumbnail','alt'=>'this is picture',
@@ -124,10 +132,10 @@ $avatarImgId = 'avatar-img' ;
                             'action' => '#',
                             'options' => ['enctype' => 'multipart/form-data']] ) ;
                         ?>
-                         <?= $form->field($mdUpload, 'imageFile')->fileInput() ?>
+                         <?= $form->field($mdUpload,'imageFile')->fileInput() ?>
 <!--                        <div class="form-group">-->
                             <div class="col-lg-11">
-                                <?= Html::button('upload',
+                                <?= Html::button($uploadBt,
                                     ['type'=>'button','class' => 'btn btn-primary', 'name' => 'upload-button',
                                     'onclick'=> 'uploadOnClick('
                                         .'"' . $uploadFormId .'","' . $urlUpload . '","' . $avatarImgId . '")' ]) ?>
@@ -159,17 +167,17 @@ $avatarImgId = 'avatar-img' ;
 <!---->
                         <div class="form-group">
                             <div class="col-lg-offset-1 col-lg-11">
-                                <?= Html::button('Registration',
+                                <?= Html::button($registrationBt,
                                     ['class' => 'btn btn-primary', 'name' => 'login-button',
                                         'onclick' => 'registrationOnClick()']) ?>
                             </div>
                         </div>
 <!---->
+                        <div class="col-lg-offset-1 form-messages" name="form-messages" >
+                        </div>
+
                         <?php ActiveForm::end(); ?>
 
-                        <div class="col-lg-offset-1" id="userregistration-message" style="color:#999;">
-                            Заполните поля
-                        </div>
                     </div>
 
                 </div>

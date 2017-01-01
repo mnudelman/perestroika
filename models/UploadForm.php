@@ -8,8 +8,10 @@
 
 namespace app\models;
 
+use app\service\PageItems;
 use yii\base\Model;
 use yii\web\UploadedFile;
+
 
 class UploadForm extends Model
 {
@@ -19,6 +21,15 @@ class UploadForm extends Model
     public $imageFile;
     private $_uploadedPath ;
     const UPLOAD_DIR = 'images/avatars/' ;
+
+    public function attributeLabels()
+    {
+        $labelTab = PageItems::getItemText(['user','fields']) ;
+
+        return [
+            'imageFile' => $labelTab['imageFile'],
+        ];
+    }
 
     public function rules()
     {

@@ -40,10 +40,15 @@ class PageItems {
     public static function getItemText(array $itemPath) {
         $itemName = $itemPath[0] ;
         self::uploadItemTab($itemName) ;
-        $partName = ( isset($itemPath[1]) ) ? $itemPath[1] : false ;
-        $lang = self::getLang() ;
         $pageItemTab = self::$_currentItemTab ;
-        $sourceTab = (false === $partName) ? $pageItemTab : $pageItemTab[$partName]  ;
+        $sourceTab = $pageItemTab ;
+        for ($i = 1; $i < count($itemPath); $i++) {
+            $partName = $itemPath[$i] ;
+            if (isset($sourceTab[$partName])) {
+                $sourceTab = $sourceTab[$partName] ;
+            }
+        }
+        $lang = self::getLang() ;
         return self::getMap($sourceTab,'text',$lang) ;
     }
     private static function getMap($sourceTab,$attrKey,$lang = null) {

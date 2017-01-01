@@ -8,6 +8,7 @@
 
 namespace app\models;
 use yii\db\ActiveRecord ;
+use app\service\PageItems ;
 
 class UserProfile extends ActiveRecord {
     private $_userProfile = false ;
@@ -17,6 +18,19 @@ class UserProfile extends ActiveRecord {
     public static function tableName(){
         return   'userprofile';
     }
+    public function attributeLabels()
+    {
+        $labelTab = PageItems::getItemText(['user','fields']) ;
+
+        return [
+            'email' => $labelTab['email'],
+            'tel' => $labelTab['tel'],
+            'site' => $labelTab['site'],
+            'company' => $labelTab['company'],
+            'info' => $labelTab['info']
+        ];
+    }
+
     public function rules()
     {
         return [

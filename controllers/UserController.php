@@ -24,60 +24,77 @@ class UserController extends Controller
 
     public function actionRegistration()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+//        if (!Yii::$app->user->isGuest) {
+//            return $this->goHome();
+//        }
         $success = false;
-        $modelRegistration = new UserRegistration();
-        $userRegAttr = (Yii::$app->request->post('UserRegistration'));
-        $modelRegistration->enterPassword_repeat = $userRegAttr['enterPassword_repeat'];
-        if ($modelRegistration->load(Yii::$app->request->post()) && $modelRegistration->saveRegistration()
-        ) {
-            $success = true;
+        $successUser = false ;
+        $successProfile = false ;
+        $profile = UserProfile::find() ;
+
+        if  (Yii::$app->user->isGuest) {
+            $userRegistration =new UserRegistration();
+            $userRegAttr = (Yii::$app->request->post('UserRegistration'));
+            $userRegistration->enterPassword_repeat = $userRegAttr['enterPassword_repeat'];
+            $successUser = $userRegistration->load(Yii::$app->request->post()) &&
+                           $userRegistration->saveRegistration() ;
+        }else {
+            $uid = Yii::$app->user->identity->id ;
+            $userRegistration =UserRegistration::findOne($uid) ;
+            $successUser = true ;
+        }
+// profile обрабатывается, если успешно завершилась обработка user
+        if ($successUser) {
             $loginForm = new LoginForm();
-            $loginForm->username = $modelRegistration->username;
-            $loginForm->password = $modelRegistration->enterPassword;
+            $loginForm->username = $userRegistration->username;
+            $loginForm->password = $userRegistration->enterPassword;
             $loginForm->login();
 
             $user = $loginForm->getUser();
             $profile = UserProfile::findOne(['userid' => $user->id]);
             $profile->load(Yii::$app->request->post());
 
-            $success = $success && $profile->save();
-
-            $errors = array_merge($profile->errors, $modelRegistration->errors);
-            if (Yii::$app->request->isAjax) {
-                $query = Yii::$app->request->post();
-                $message = (empty($errors)) ? ['oK!'] : $errors;
-
-
-                $answ = [
-                    'success' => $success,
-                    'message' => $message
-                ];
-                echo json_encode($answ);
-            }
-
+            $successProfile =  $profile->save();
         }
+        $errors = (isset($userRegistration->errors)) ? $userRegistration->errors : [];
+
+        $errors = (isset($profile->errors)) ? array_merge($errors, $profile->errors) : $errors;
+        $userAttributes = ($successUser) ?  $userRegistration->attributes : [0] ;
+        $profileAttributes = ($successProfile) ? $profile->attributes : [0] ;
+
+
+        if (Yii::$app->request->isAjax) {
+            $answ = [
+                'success' => $successUser && $successProfile,
+                'successUser' => $successUser,
+                'successProfile' => $successProfile,
+                'message' => $errors,
+                'userAttributes' => $userAttributes,
+                'profileAttributes' => $profileAttributes
+            ];
+            echo json_encode($answ);
+        }
+
     }
+
 
     public function actionProfile()
     {
         if (Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-        $userId  = Yii::$app->user->identity->id ;
-        $userProfile =  UserProfile::findOne(['userid' => $userId]);
-        $oldAttributes = $userProfile->attributes ;
-        $opcod = Yii::$app->request->post('opcod') ;
+        $userId = Yii::$app->user->identity->id;
+        $userProfile = UserProfile::findOne(['userid' => $userId]);
+        $oldAttributes = $userProfile->attributes;
+        $opcod = Yii::$app->request->post('opcod');
 // если запрос 'get' на имеющиеся значения, то сохранять не надо
-        $success = true ;
+        $success = true;
         if ($opcod === 'save') {
-            $userProfile->load(Yii::$app->request->post()) ;
-            $success = $userProfile->save() ;
+            $userProfile->load(Yii::$app->request->post());
+            $success = $userProfile->save();
         }
 
-        $errors = $userProfile->errors ;
+        $errors = $userProfile->errors;
         if (Yii::$app->request->isAjax) {
             $message = (empty($errors)) ? ['oK!'] : $errors;
 

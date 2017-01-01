@@ -8,6 +8,7 @@
 
 namespace app\models;
 use yii\db\ActiveRecord ;
+use app\service\PageItems ;
 use Yii ;
 
 class UserRegistration extends ActiveRecord {
@@ -21,6 +22,22 @@ class UserRegistration extends ActiveRecord {
     public static function tableName(){
         return 'user';
     }
+    public function attributeLabels()
+    {
+        $labelTab = PageItems::getItemText(['user','fields']) ;
+
+        return [
+            'username' => $labelTab['username'],
+            'enterPassword' => $labelTab['password'],
+            'enterPassword_repeat' => $labelTab['password_repeat'],
+            'email' => $labelTab['email'],
+            'tel' => $labelTab['tel'],
+            'site' => $labelTab['site'],
+            'company' => $labelTab['company'],
+            'info' => $labelTab['info']
+        ];
+    }
+
     public function rules()
     {
         $currentDate = date('Y.m.d',time()) ;
