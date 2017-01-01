@@ -68,7 +68,7 @@ class LoginForm extends Model
                 $u->date_last = date('Y.m.d',time()) ;
                 $u->save();
             }
-//            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*5 : 0);
         }
         return false;
     }

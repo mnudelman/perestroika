@@ -21,6 +21,8 @@ $mdProf = new UserProfile();
 $mdUpload = new UploadForm();
 $title = 'myRegistration';
 $urlUpload = Url::to(['site/upload']) ;
+$uploadFormId = "upload-form" ;
+$avatarImgId = 'avatar-img' ;
 ?>
 
 <div class="modal fade" id="registration-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -32,40 +34,107 @@ $urlUpload = Url::to(['site/upload']) ;
                 <h4 class="modal-title" id="enter-modal-title"><?= Html::encode($title) ?></h4>
             </div>
             <div class="modal-body" id="modal-body">
+
+
+
+
+
+
+
+
+
+
+
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Please fill out the following fields to registration with rules:<span class="caret"></span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div id="enter-modal-insert">
                     <div class="site-login">
                         <p>Please fill out the following fields to login:</p>
 <!---->
-
-                        <?php $form = ActiveForm::begin([
-                            'id' => 'upload-form',
-                            'action' => $urlUpload,
-                            'options' => ['enctype' => 'multipart/form-data']] ) ;
+                        <?php
+                        $img = Html::img('@web/images/avatars/people.png'  ,
+                            ['class'=>'img-responsive img-thumbnail','alt'=>'this is picture',
+                            'width'=>'72px','id' => $avatarImgId]) ;
+                        echo Html::tag('div',$img);
                         ?>
 
-                        <?= $form->field($mdUpload, 'imageFile')->fileInput() ?>
-<!--                        <button>Submit</button>-->
-                        <div class="form-group">
-                            <div class="col-lg-offset-1 col-lg-11">
+                        <?php $form = ActiveForm::begin([
+                            'id' => $uploadFormId,
+                            'action' => '#',
+                            'options' => ['enctype' => 'multipart/form-data']] ) ;
+                        ?>
+                         <?= $form->field($mdUpload, 'imageFile')->fileInput() ?>
+<!--                        <div class="form-group">-->
+                            <div class="col-lg-11">
                                 <?= Html::button('upload',
-                                    ['type'=>'submit','class' => 'btn btn-primary', 'name' => 'upload-button',
-                                    'onclick'=> 'uploadOnClick()' ]) ?>
+                                    ['type'=>'button','class' => 'btn btn-primary', 'name' => 'upload-button',
+                                    'onclick'=> 'uploadOnClick('
+                                        .'"' . $uploadFormId .'","' . $urlUpload . '","' . $avatarImgId . '")' ]) ?>
                             </div>
-                        </div>
-
-
-
-
-
-                        <?php ActiveForm::end() ?>
-
-
-
-
-
-
-
-<!--                        --><?php
+<!--                        </div>-->
+                        <?php ActiveForm::end() ?><br><br>
+                       <?php
                         $form = ActiveForm::begin([
                             'id' => 'registration-form',
                             'action' => '#',
@@ -74,7 +143,8 @@ $urlUpload = Url::to(['site/upload']) ;
                                 'template' => "{label}\n<div class=\"col-lg-10\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
                                 'labelOptions' => ['class' => 'col-lg-2 control-label'],
                             ],
-                        ]); ?>
+                        ]);
+                       ?>
 <!---->
                         <?= $form->field($mdReg, 'username')->textInput(['autofocus' => true]) ?>
                         <?= $form->field($mdReg, 'enterPassword')->passwordInput() ?>

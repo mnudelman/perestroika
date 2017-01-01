@@ -9,6 +9,7 @@ namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\UploadedFile ;
 use app\service\PageItems ;
@@ -48,7 +49,7 @@ class SiteController extends BaseController
 
     public function beforeAction($action){
         if( $action->id == 'upload' ){
-            $this->enableCsrfValidation = false;
+//            $this->enableCsrfValidation = false;
         }
         return parent::beforeAction($action);
     }
@@ -147,8 +148,17 @@ class SiteController extends BaseController
     public function actionLogout()
     {
         Yii::$app->user->logout();
+        if( Yii::$app->request->isAjax ){
+            $answ = [
+                'success' => true ,
+                'message' => 'oK!'
+            ] ;
+            echo json_encode($answ) ;
+        }else {
+            return $this->goHome();
+        }
 
-        return $this->goHome();
+
     }
     public function actionUpload()
     {
@@ -162,9 +172,11 @@ class SiteController extends BaseController
             }
         }
         if( Yii::$app->request->isAjax ){
+            $uploadedPath = ($success) ? $model->getUploadedPath() : false ;
             $answ = [
                 'success' => $success ,
                 'message' => $model->errors,
+                'uploadedPath' => Html::encode($uploadedPath)
             ] ;
             echo json_encode($answ) ;
 

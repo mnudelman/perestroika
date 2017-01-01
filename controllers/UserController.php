@@ -29,37 +29,64 @@ class UserController extends Controller
         }
         $success = false;
         $modelRegistration = new UserRegistration();
-        $modelProfile = new UserProfile();
-        $userRegAttr = (Yii::$app->request->post('UserRegistration')) ;
-        $modelRegistration->enterPassword_repeat = $userRegAttr['enterPassword_repeat'] ;
+        $userRegAttr = (Yii::$app->request->post('UserRegistration'));
+        $modelRegistration->enterPassword_repeat = $userRegAttr['enterPassword_repeat'];
         if ($modelRegistration->load(Yii::$app->request->post()) && $modelRegistration->saveRegistration()
-             ) {
+        ) {
             $success = true;
             $loginForm = new LoginForm();
             $loginForm->username = $modelRegistration->username;
             $loginForm->password = $modelRegistration->enterPassword;
             $loginForm->login();
 
-            $user = $loginForm->getUser() ;
-            $modelProfile->getByUserId($user->id) ;
-            $modelProfile->load(Yii::$app->request->post()) ;
-            $success = $success && $modelProfile->saveProfile() ;
+            $user = $loginForm->getUser();
+            $profile = UserProfile::findOne(['userid' => $user->id]);
+            $profile->load(Yii::$app->request->post());
 
-//            return $this->goBack();
+            $success = $success && $profile->save();
+
+            $errors = array_merge($profile->errors, $modelRegistration->errors);
+            if (Yii::$app->request->isAjax) {
+                $query = Yii::$app->request->post();
+                $message = (empty($errors)) ? ['oK!'] : $errors;
+
+
+                $answ = [
+                    'success' => $success,
+                    'message' => $message
+                ];
+                echo json_encode($answ);
+            }
+
         }
-//        return $this->render('login', [
-//            'model' => $model,
-//        ]);
-        $errors = [];
-        $errors = array_merge( $modelProfile->errors, $modelRegistration->errors);
+    }
+
+    public function actionProfile()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        $userId  = Yii::$app->user->identity->id ;
+        $userProfile =  UserProfile::findOne(['userid' => $userId]);
+        $oldAttributes = $userProfile->attributes ;
+        $opcod = Yii::$app->request->post('opcod') ;
+// если запрос 'get' на имеющиеся значения, то сохранять не надо
+        $success = true ;
+        if ($opcod === 'save') {
+            $userProfile->load(Yii::$app->request->post()) ;
+            $success = $userProfile->save() ;
+        }
+
+        $errors = $userProfile->errors ;
         if (Yii::$app->request->isAjax) {
-            $query = Yii::$app->request->post();
             $message = (empty($errors)) ? ['oK!'] : $errors;
 
-
             $answ = [
+                'opcod' => $opcod,
                 'success' => $success,
-                'message' => $message
+                'message' => $message,
+                'attributes' => $userProfile->attributes,
+                'oldAttributes' => $oldAttributes,
             ];
             echo json_encode($answ);
         }

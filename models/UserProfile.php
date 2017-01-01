@@ -12,7 +12,7 @@ use yii\db\ActiveRecord ;
 class UserProfile extends ActiveRecord {
     private $_userProfile = false ;
     private $_userId ;
-
+//    public $avatar = '' ;
 
     public static function tableName(){
         return   'userprofile';
@@ -24,6 +24,7 @@ class UserProfile extends ActiveRecord {
             ['email','email'],
             ['email', 'unique'],
             ['site','url'],
+            ['avatar','default']
         ];
     }
     public function setUserId($userid) {
@@ -44,8 +45,8 @@ class UserProfile extends ActiveRecord {
      */
     public function getByUserId($id)
     {
-        $this->findOne(['userid' => $id]);
+        $aa = $this->findOne(['userid' => $id]);
         $this->userid = $id ;
-
+        return $aa ;
     }
 }

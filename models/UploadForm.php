@@ -17,6 +17,8 @@ class UploadForm extends Model
      * @var UploadedFile
      */
     public $imageFile;
+    private $_uploadedPath ;
+    const UPLOAD_DIR = 'images/avatars/' ;
 
     public function rules()
     {
@@ -28,10 +30,16 @@ class UploadForm extends Model
     public function upload()
     {
         if ($this->validate()) {
-            $this->imageFile->saveAs('images/avatars/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            $randomSuffix = substr(\Yii::$app->security->generateRandomString(),-5) ;
+            $this->_uploadedPath = self::UPLOAD_DIR .
+                $this->imageFile->baseName . '_' . $randomSuffix .  '.' . $this->imageFile->extension ;
+            $this->imageFile->saveAs($this->_uploadedPath);
             return true;
         } else {
             return false;
         }
+    }
+    public function getUploadedPath() {
+        return $this->_uploadedPath ;
     }
 }

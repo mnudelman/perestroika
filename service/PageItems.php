@@ -23,7 +23,7 @@ class PageItems {
      * Загрузка таблицы $_currentItemTab из php - файла
      * с именем '$itemName'.php
      */
-    private function uploadItemTab($itemName) {
+    private static function uploadItemTab($itemName) {
         if (is_null(self::$instance)) {
             self::$instance = new self() ;
         }
@@ -46,7 +46,7 @@ class PageItems {
         $sourceTab = (false === $partName) ? $pageItemTab : $pageItemTab[$partName]  ;
         return self::getMap($sourceTab,'text',$lang) ;
     }
-    private function getMap($sourceTab,$attrKey,$lang = null) {
+    private static function getMap($sourceTab,$attrKey,$lang = null) {
         $result = [] ;
         foreach ($sourceTab as $key => $attrValue) {
             if (empty($attrKey)) {
@@ -65,7 +65,7 @@ class PageItems {
         }
         return $result ;
     }
-    private function getLang() {
+    private static function getLang() {
         if (isset($_SESSION['lang'])) {
             Yii::$app->language = $_SESSION['lang'] ;
         }

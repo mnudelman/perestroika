@@ -45,6 +45,13 @@ return [
             'en' => 'ENTER'
         ],
     ],
+    'logout' => [
+        'text' => [
+            'ru' => 'ОТКЛЮЧИТЬСЯ',
+            'en' => 'LOGOUT'
+        ],
+    ],
+
     'profile' => [
         'text' => [
             'ru' => 'ПРОФИЛЬ',

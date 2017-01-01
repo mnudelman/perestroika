@@ -14,7 +14,7 @@ class UserRegistration extends ActiveRecord {
      const NAME_MIN_LENGTH = 8 ;
      const NAME_MAX_LENGTH = 20 ;
      const PASSW_MIN_LENGTH = 12 ;
-     const PASSW_MAX_LENGTH = 200 ;
+     const PASSW_MAX_LENGTH = 20 ;
     public $enterPassword = '' ;
     public $enterPassword_repeat = '' ;
 

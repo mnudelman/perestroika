@@ -12,6 +12,7 @@ use yii\bootstrap\Modal ;
 use yii\widgets\ActiveForm ;
 use app\models\LoginForm ;
 use app\service\PageItems ;
+use app\models\UserProfile ;
 ?>
 <?php
   $labelTab = PageItems::getItemText(['topMenu']) ;
@@ -27,7 +28,20 @@ use app\service\PageItems ;
   $langImageRu = 'images/ru.png' ;
   $langImageEn = 'images/en.png' ;
   $userIsGuest = Yii::$app->user->isGuest ;
-  $userName = ($userIsGuest) ? $labelTab['user-noname'] : Yii::$app->user->identity->username ;
+  $guestName =  $labelTab['user-noname'] ;
+  $userName = ($userIsGuest) ? $guestName : Yii::$app->user->identity->username ;
+
+$imgAvatarName = '' ;
+  $imgAvatarEmpty = 'people.png' ;
+  if (!$userIsGuest) {
+      $uid = Yii::$app->user->identity->id  ;
+      $profile = UserProfile::findOne(['userid' => $uid]) ;
+      $imgAvatarName = $profile->avatar ;
+  }
+  $imgAvatarName = (empty($imgAvatarName)) ? $imgAvatarEmpty : $imgAvatarName ;
+  $imgAvatar = Html::img('images/avatars/' . $imgAvatarName ,
+      ['alt'=>'аватар','id' => 'topmenu-avatar','class' => 'img-responsive topmenu-avatar-image']) ;
+// 'class'=>'img-responsive',
 ?>
 
 <div class="wrap">
@@ -38,7 +52,7 @@ use app\service\PageItems ;
         ],
     ]);
       $img = Html::img($langImage ,
-          ['class'=>'img-responsive','alt'=>'выбор языка']) ;
+          ['class'=>'topmenu-lang-image','alt'=>'выбор языка']) ;
       // заголовок  dropdown
       $a = Html::beginTag('a',
                ['class' => 'dropdown-toggle',
@@ -46,8 +60,8 @@ use app\service\PageItems ;
                'role' => "button", 'aria-haspopup' => "true",'aria-expanded'=>"false"])  . $img .
                  '<span class="caret"></span>' . Html::endTag('a') ;
     // тело dropdown
-    $imgRu = Html::img($langImageRu ,['class'=>'img-responsive']) ;
-    $imgEn = Html::img($langImageEn ,['class'=>'img-responsive']) ;
+    $imgRu = Html::img($langImageRu ,['class'=>'img-responsive topmenu-lang-image']) ;
+    $imgEn = Html::img($langImageEn ,['class'=>'img-responsive topmenu-lang-image']) ;
 
     // li - ru
     $aRu = Html::beginTag('a', ['href' => $urlRu ]) . $imgRu . $labelTab['lang-russian'] . Html::endTag('a') ;
@@ -84,15 +98,33 @@ use app\service\PageItems ;
                 'id' => '',
                 'data-toggle' => "dropdown", 'href' => "#",
                 'role' => "button", 'aria-haspopup' => "true",'aria-expanded'=>"false"])  .
-        '<i class="fa fa-user"></i>&nbsp;&nbsp;' .'<span id="topmenu-username">' . $userName .'</span>' .
+        $imgAvatar . '<span id="topmenu-username">' . $userName .'</span>' .
         '<span class="caret"></span>' . Html::endTag('a') ;
     // тело dropdown
-    // li - entr
+
+
+    // li - logout
+    $enable = (!$userIsGuest) ? 'enable' : 'disabled' ;
+    $hidden = ($userIsGuest) ? '"hidden",' : null ;
+    $aEnter = Html::beginTag('a', ['href' => '#']) .
+        $labelTab['logout'] . Html::endTag('a') ;
+    $userIsGuestParam = ($userIsGuest) ? '1' : '0' ;
+    $liLogout = Html::beginTag('li',['class' => $enable,'id'=> 'topmenu-logout',
+            'hidden' => $hidden,
+            'onClick' => 'logoutOnClick(' . $userIsGuestParam .',"'. $guestName . '")']) . $aEnter . Html::endTag('li') ;
+
+
+
+
+
+
+    // li - enter
     $enable = ($userIsGuest) ? 'enable' : 'disabled' ;
+    $hidden = (!$userIsGuest) ? '"hidden",' : null ;
     $aEnter = Html::beginTag('a', ['href' => '#','data-toggle'=>"modal",'data-target'=>"#enter-form" ]) .
         $labelTab['enter'] . Html::endTag('a') ;
     $userIsGuestParam = ($userIsGuest) ? '1' : '0' ;
-    $liEnter = Html::beginTag('li',['class' => $enable,'id'=> 'topmenu-enter',
+    $liEnter = Html::beginTag('li',['class' => $enable,'id'=> 'topmenu-enter','hidden' => $hidden,
         'onClick' => 'enterTargetControl(' . $userIsGuestParam . ')']) . $aEnter . Html::endTag('li') ;
     //
     // li - registration
@@ -100,15 +132,17 @@ use app\service\PageItems ;
 
 
     $enable = ($userIsGuest) ? 'enable' : 'disabled' ;
+    $hidden = (!$userIsGuest) ? '"hidden",' : null ;
     $aRg = Html::beginTag('a', ['href' => '#','data-toggle'=>"modal",'data-target'=>"#registration-form"  ])  .
         $labelTab['registration'] . Html::endTag('a') ;
-    $liRg = Html::beginTag('li',['class' => $enable,'id'=> 'topmenu-registration',
+    $liRg = Html::beginTag('li',['class' => $enable,'id'=> 'topmenu-registration','hidden' => $hidden,
         'onClick' => 'enterTargetControl(' . $userIsGuestParam . ')']) . $aRg . Html::endTag('li') ;
     //
 
     // li - profile
     $enable = (!$userIsGuest) ? 'enable' : 'disabled' ;
-    $aProfile = Html::beginTag('a', ['href' => '#' ]) .  $labelTab['profile'] . Html::endTag('a') ;
+    $aProfile = Html::beginTag('a', ['href' => '#','data-toggle'=>"modal",'data-target'=>"#profile-form" ]) .
+        $labelTab['profile'] . Html::endTag('a') ;
     $liProfile = Html::beginTag('li',['class' => $enable,'id'=> 'topmenu-profile']) . $aProfile . Html::endTag('li') ;
     //
 
@@ -119,7 +153,7 @@ use app\service\PageItems ;
     //
 
     $ulDropdownMenu = Html::beginTag('ul',['class' => "dropdown-menu"]) .
-        $liEnter . $liRg . $liProfile . $liOffice .Html::endTag('ul') ;
+        $liLogout . $liEnter . $liRg . $liProfile . $liOffice .Html::endTag('ul') ;
     $liTotalDropdown = Html::beginTag('li',['class' =>"dropdown", 'role' => "presentation"]) . $a . $ulDropdownMenu .
         Html::endTag('li') ;
 
@@ -138,7 +172,7 @@ use app\service\PageItems ;
     ?>
 
     <div>
-        <nav class="navbar navbar-default" style="margin-top:60px">
+        <nav class="navbar navbar-default" style="margin-top:90px">
             <div class="container-fluid">
                 <div class="row" style="background-color: white;">
                     <div class="navbar-header">

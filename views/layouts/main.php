@@ -66,12 +66,12 @@ if (isset($_SESSION['lang'])) {
     </div>
 <?=$this->render('layoutParts/login') ;?>
 <?=$this->render('layoutParts/registration') ;?>
+<?=$this->render('layoutParts/profile') ;?>
 <?=$this->render('layoutParts/footerPart')?>
 
 
-// мгновенный вывод alert
-<?//= Html::script('alert("Привет!");', ['defer' => true]);?>
-//
+<!--//= Html::script('alert("Привет!");', ['defer' => true]); -->
+
 
 
 <?php $this->endBody() ?>
