@@ -10,8 +10,8 @@ use app\models\LoginForm;
 use app\models\UserProfile;
 use app\models\UploadForm;
 use yii\widgets\Pjax;
-use Yii ;
-
+use app\service\PageItems ;
+//use Yii ;
 ?>
 <?php
 $userIsGuest = Yii::$app->user->isGuest ;
@@ -29,7 +29,36 @@ $urlUpload = Url::to(['site/upload']) ;
 $uploadFormId = "profile-upload-form" ;
 $avatarImgId = 'profile-avatar-img' ;
 $avatarImgName = $profile->avatar ;
-$avatarImgName = (empty($avatarImgName)) ? 'peole.png' : $avatarImgName ;
+$avatarImgName = (empty($avatarImgName)) ? 'people.png' : $avatarImgName ;
+
+
+
+
+$titleTab = PageItems::getItemText(['user','forms','profileForm','title']) ;
+$title = $titleTab['text'] ;
+$ruleTitleTab = PageItems::getItemText(['user','forms','profileForm','rules','title']) ;
+$ruleTitle = $ruleTitleTab['text'] ;
+$ruleContentTab = PageItems::getItemText(['user','forms','profileForm','rules','content']) ;
+$ruleContent = $ruleContentTab['text'] ;
+$buttonsTab = PageItems::getItemText(['user','buttons']) ;
+$saveBt = $buttonsTab['saveProfile'] ;
+$restoreBt = $buttonsTab['restoreProfile'] ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
 
 <div class="modal fade" id="profile-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -41,9 +70,33 @@ $avatarImgName = (empty($avatarImgName)) ? 'peole.png' : $avatarImgName ;
                 <h4 class="modal-title" id="enter-modal-title"><?= Html::encode($title) ?></h4>
             </div>
             <div class="modal-body" id="modal-body">
+
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#profile-form-collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <?=$ruleTitle ?><span class="caret"></span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="profile-form-collapseOne" class="panel-collapse collapse in rule-content" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <?=$ruleContent?>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
                 <div id="enter-modal-insert">
                     <div class="site-login">
-                        <p>Please fill out the following fields to profile edt:</p>
+
                         <!---->
                         <?php
                         $img = Html::img('@web/images/avatars/' . $avatarImgName  ,
@@ -89,16 +142,22 @@ $avatarImgName = (empty($avatarImgName)) ? 'peole.png' : $avatarImgName ;
                         <!---->
                         <div class="form-group">
                             <div class="col-lg-offset-1 col-lg-11">
-                                <?= Html::button('save',
+                                <?= Html::button($saveBt,
                                     ['class' => 'btn btn-primary', 'name' => 'login-button',
                                         'onclick' => 'profileOnClick()']) ?>
-                                <?= Html::button('restore',
+                                <?= Html::button($restoreBt,
                                     ['class' => 'btn btn-danger', 'name' => 'restore-button',
                                         'onclick' => 'profileOnClick(1)']) ?>
                             </div>
                         </div>
                         <!---->
                         <div class="col-lg-offset-1" name="form-messages" style="color:#ff0000;">
+                        </div>
+                        <div class="form-messages-success" name="form-messages-success" >
+
+                        </div>
+                        <div class="form-messages-error" name="form-messages-error" >
+
                         </div>
 
                         <?php ActiveForm::end(); ?>
@@ -109,7 +168,7 @@ $avatarImgName = (empty($avatarImgName)) ? 'peole.png' : $avatarImgName ;
             </div>
             <div class="modal-footer">
                 <p>
-                    <a class="btn btn-default" href="#" role="button" data-dismiss="modal" id="modal-exit">exit</a>
+<!--                    <a class="btn btn-default" href="#" role="button" data-dismiss="modal" id="modal-exit">exit</a>-->
                 </p>
             </div>
         </div>

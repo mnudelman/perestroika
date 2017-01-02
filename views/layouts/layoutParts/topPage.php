@@ -85,6 +85,7 @@ $imgAvatarName = '' ;
             ['label' => $labelTab['about'], 'url' => ['/about/index']],
             ['label' => $labelTab['order'], 'url' => ['/order/index']],
             ['label' => $labelTab['developers'], 'url' => ['/developer/index']],
+
             $liForum,
             $liTotalDropdown,
         ],
@@ -186,10 +187,4 @@ $imgAvatarName = '' ;
     </div>
 </div>
 
-
-<?php
-//$model = new LoginForm() ;
-//$this->title = 'myLogin' ;
-//$this->render('login') ;
-?>
 

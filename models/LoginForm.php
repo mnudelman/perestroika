@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use app\service\PageItems ;
 
 /**
  * LoginForm is the model behind the login form.
@@ -19,7 +20,16 @@ class LoginForm extends Model
 
     private $_user = false;
 
+    public function attributeLabels()
+    {
+        $labelTab = PageItems::getItemText(['user', 'fields']);
 
+        return [
+            'username' => $labelTab['username'],
+            'password' => $labelTab['password'],
+            'rememberMe' => $labelTab['rememberMe'],
+        ];
+    }
     /**
      * @return array the validation rules.
      */
@@ -27,7 +37,7 @@ class LoginForm extends Model
     {
         return [
             // username and password are both required
-            [['username', 'password'],'required','message'=>'нет-нет'],
+            [['username', 'password'],'required'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
@@ -44,12 +54,13 @@ class LoginForm extends Model
      */
     public function validatePassword($attribute, $params)
     {
+        $messages = PageItems::getItemText(['user','forms', 'loginForm','messages']);
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (is_null($user)) {
-                $this->addError($attribute, 'Incorrect username.');
+                $this->addError($attribute, $messages['username']);
             } elseif(!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect password.');
+                $this->addError($attribute, $messages['password']);
             }
         }
     }

@@ -28,7 +28,7 @@ body {
 .rule-content {
     background-color: #ffe7c5;
     color: #5f391b;
-    font-weight: 700;
+    font-weight: 400;
 }
 /*звёздочка рядом с обязательным атрибутом*/
 div.required label.control-label:before {
@@ -36,9 +36,15 @@ div.required label.control-label:before {
     color: red;
 }
 
-.form-messages {
-    color: red;
+.form-messages,.form-messages-error,.form-messages-success {
     background-color: #ffe7c5;
+    font-weight: 500;
+}
+.form-messages-success {
+    color: #008000;
+}
+.form-messages-error {
+    color: #ff0000;
 }
 
 textarea {

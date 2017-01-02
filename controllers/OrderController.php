@@ -10,8 +10,9 @@ namespace app\controllers;
 
 
 use yii\web\Controller;
+use app\controllers\BaseController ;
 
-class OrderController extends Controller {
+class OrderController extends BaseController {
     public function actionIndex()
     {
         return $this->render('index');

@@ -16,7 +16,7 @@ use app\service\PageItems ;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\UploadForm;
-//use app\models\ContactForm;
+use app\models\UserProfile;
 use app\controllers\BaseController ;
 
 class SiteController extends BaseController
@@ -85,28 +85,6 @@ class SiteController extends BaseController
      *
      * @return string
      */
-    public function actionLogin__________()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-
-
-            return $this->goBack();
-        }
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Login action.
-     *
-     * @return string
-     */
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
@@ -114,9 +92,12 @@ class SiteController extends BaseController
         }
         $success = false ;
         $model = new LoginForm();
+        $avatar = '' ;
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $success = true ;
-
+            $userId = Yii::$app->user->identity->id ;
+            $profile = UserProfile::findOne(['userid' => $userId]);
+            $avatar = $profile->avatar ;
 //            return $this->goBack();
         }
 //        return $this->render('login', [
@@ -128,10 +109,11 @@ class SiteController extends BaseController
             $query = Yii::$app->request->post() ;
             $message=  (empty($model->errors)) ? ['oK!'] : $model->errors ;
 
-
                 $answ = [
                 'success' => $success ,
-                'message' => $message
+                'message' => $message,
+                'avatar'  => $avatar,
+                'z-end' => 'end'
             ] ;
             echo json_encode($answ) ;
         }

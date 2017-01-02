@@ -9,12 +9,27 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm ;
 use app\models\LoginForm ;
-
+use app\service\PageItems ;
 ?>
 <?php
-$title = 'LOGIN' ;
+
 $model = new LoginForm() ;
-$this->title = 'myLogin' ;
+
+
+
+$titleTab = PageItems::getItemText(['user','forms','loginForm','title']) ;
+$title = $titleTab['text'] ;
+$ruleTitleTab = PageItems::getItemText(['user','forms','loginForm','rules','title']) ;
+$ruleTitle = $ruleTitleTab['text'] ;
+$ruleContentTab = PageItems::getItemText(['user','forms','loginForm','rules','content']) ;
+$ruleContent = $ruleContentTab['text'] ;
+$buttonsTab = PageItems::getItemText(['user','buttons']) ;
+$loginBt = $buttonsTab['login'] ;
+
+
+
+
+
 ?>
 <div class="modal fade" id="enter-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -25,9 +40,28 @@ $this->title = 'myLogin' ;
                 <h4 class="modal-title" id="enter-modal-title"><?= Html::encode($title) ?></h4>
             </div>
             <div class="modal-body" id="modal-body">
+
+
+
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#enter-form-collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <?=$ruleTitle ?><span class="caret"></span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="enter-form-collapseOne" class="panel-collapse collapse in rule-content" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <?=$ruleContent?>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
                 <div id="enter-modal-insert" >
                     <div class="site-login">
-                        <p>Please fill out the following fields to login:</p>
 
                         <?php
                         $form = ActiveForm::begin([
@@ -50,23 +84,27 @@ $this->title = 'myLogin' ;
 
                         <div class="form-group">
                             <div class="col-lg-offset-1 col-lg-11">
-                                <?= Html::button('Login',
+                                <?= Html::button($loginBt,
                                     ['class' => 'btn btn-primary', 'name' => 'login-button',
                                         'onclick' => 'loginOnClick()']) ?>
                             </div>
                         </div>
+                        <div class="form-messages-success" name="form-messages-success" >
+
+                        </div>
+                        <div class="form-messages-error" name="form-messages-error" >
+
+                        </div>
 
                         <?php ActiveForm::end(); ?>
 
-                        <div class="col-lg-offset-1" name="form-messages" style="color:#ff0000;">
-                        </div>
                     </div>
 
                 </div>
             </div>
             <div class="modal-footer">
                 <p>
-                    <a class="btn btn-default" href="#" role="button" data-dismiss="modal" id="modal-exit">exit</a>
+<!--                    <a class="btn btn-default" href="#" role="button" data-dismiss="modal" id="modal-exit">exit</a>-->
                 </p>
             </div>
         </div>

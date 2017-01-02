@@ -14,9 +14,16 @@ use Yii;
 use app\models\UserProfile;
 use app\models\UserRegistration;
 use app\models\LoginForm;
+use app\service\PageItems ;
+use app\controllers\BaseController ;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
+    private $_registrationSuccessMessage = '' ;
+    private $_registrationErrorMessage = '' ;
+    private $_profileSuccessMessage = '' ;
+    private $_profileErrorMessage = '' ;
+
     public function actionIndex()
     {
         return $this->render('index');
@@ -27,6 +34,11 @@ class UserController extends Controller
 //        if (!Yii::$app->user->isGuest) {
 //            return $this->goHome();
 //        }
+        $_registrationMessage =
+            PageItems::getItemText(['user','forms','registrationForm','rules','messages']) ;
+        $_profileMessage =
+            PageItems::getItemText(['user','forms','profileForm','rules','messages']) ;
+
         $success = false;
         $successUser = false ;
         $successProfile = false ;
@@ -70,7 +82,12 @@ class UserController extends Controller
                 'successProfile' => $successProfile,
                 'message' => $errors,
                 'userAttributes' => $userAttributes,
-                'profileAttributes' => $profileAttributes
+                'profileAttributes' => $profileAttributes,
+                'messageRegistration' => ($successUser) ? $_registrationMessage['success'] :
+                    $_registrationMessage['error'] ,
+                'messageProfile' => ($successProfile) ? $_profileMessage['success'] :
+                    $_profileMessage['error'] ,
+                'z-end' => 'end'
             ];
             echo json_encode($answ);
         }
@@ -104,6 +121,7 @@ class UserController extends Controller
                 'message' => $message,
                 'attributes' => $userProfile->attributes,
                 'oldAttributes' => $oldAttributes,
+                'end' => 'end'
             ];
             echo json_encode($answ);
         }

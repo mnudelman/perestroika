@@ -32,6 +32,15 @@ function enterTargetControl(isGuest) {
     el = $('#topmenu-registration');
     a = el.children('a')[0];
     a.dataset.target = (isGuest) ? '#registration-form' : '#';
+    if (isGuest) {   // очиститть поля от пред использования
+        $('#userregistration-username').removeAttr('readonly');
+        $('#userregistration-enterpassword').removeAttr('readonly');
+        $('#userregistration-enterpassword_repeat').removeAttr('readonly');
+        $('#registration-form [name="form-messages-success"]').empty() ;
+        $('#registration-form [name="form-messages-error"]').empty() ;
+
+    }
+
 
 }
 
@@ -104,7 +113,8 @@ function loginOnClick() {
             "password": password
         }
     };
-    $('#login-form [name="form-messages"]').empty() ;
+    $('#login-form [name="form-messages-success"]').empty() ;
+    $('#login-form [name="form-messages-error"]').empty() ;
     $.ajax({
         url: 'index.php?r=site%2Flogin',
         data: {
@@ -125,38 +135,28 @@ function loginOnClick() {
                 $('#topmenu-enter').attr('hidden','hidden') ;
                 $('#topmenu-registration').attr('hidden','hidden') ;
                 $('#topmenu-forum')[0].className = 'enable';
-                //$('#topmenu-enter')[0].className = 'disabled';
-                //$('#topmenu-registration')[0].className = 'disabled';
                 $('#topmenu-profile')[0].className = 'disable';
                 $('#topmenu-office')[0].className = 'disable';
                 $('#topmenu-username').text(userName);
-
-                profileOnClick(1) ;
-
-
-
-                $('#modal-exit').click();      // закрываем окно login-form
+                var avatar = rr['avatar'] ;
+                if (avatar.length > 0) {
+                    var avatarPath = 'images/avatars/' + avatar ;
+                    $('#topmenu-avatar').attr('src', avatarPath);
+                }
+//                profileOnClick(1) ;  // плохая идея
+                $('#enter-form').modal('hide') ;
             } else {
 
-                $('#login-form [name="form-messages"]').empty() ;
                 for (var rule in message) {
                     var messageText = message[rule];
                     for (var i = 0; i < messageText.length; i++) {
-                        $('#login-form [name="form-messages"]').append(messageText[i] + '<br>');
+                        $('#login-form [name="form-messages-error"]').append(messageText[i] + '<br>');
                     }
                 }
             }
-// переопределяем доступ ***
-//            console.log(res);
         },
-        //error: function () {
-        //    alert('Error!');
-        //}
-
         error: function (event, XMLHttpRequest, ajaxOptions, thrownError) {
             var responseText = event.responseText; // html - page
-
-
         }
     });
 }
@@ -211,7 +211,8 @@ function registrationOnClick() {
             "avatar" : imgFile
         }
     };
-    $('#registration-form [name="form-messages"]').empty() ;
+    $('#registration-form [name="form-messages-success"]').empty() ;
+    $('#registration-form [name="form-messages-error"]').empty() ;
     $.ajax({
         url: 'index.php?r=user%2Fregistration',
         data: data,
@@ -223,6 +224,7 @@ function registrationOnClick() {
             var message = rr['message'];
             if (rr['successUser'] === true) {
                 $('#topmenu-logout').removeAttr('hidden') ;
+                $('#topmenu-logout')[0].className = 'enable';
                 $('#topmenu-enter').attr('hidden','hidden') ;
                 $('#topmenu-registration').attr('hidden','hidden') ;
                 $('#topmenu-forum')[0].className = 'enable';
@@ -237,13 +239,24 @@ function registrationOnClick() {
                 $('#userregistration-enterpassword').attr('readonly','readonly');
                 $('#userregistration-enterpassword_repeat').attr('readonly','readonly');
 
-                $('#registration-form [name="form-messages"]').append('Пользователь занесён в базу.<br>');
+                $('#registration-form [name="form-messages-success"]').
+                    append(rr['messageRegistration'] + '<br>');
+            }else {
+                $('#registration-form [name="form-messages-error"]').
+                    append(rr['messageRegistration'] + '<br>');
             }
-            if ('successProfile') {
+            if (rr['successProfile']) {
                 imgFilePath = $('#avatar-img').attr('src');
                 if (imgFilePath.length > 0) {
                     $('#topmenu-avatar').attr('src', imgFilePath);
                 }
+                $('#registration-form [name="form-messages-success"]').
+                    append(rr['messageProfile'] + '<br>');
+
+            }else {
+                $('#registration-form [name="form-messages-error"]').
+                    append(rr['messageProfile'] + '<br>');
+
             }
 
 
@@ -252,7 +265,7 @@ function registrationOnClick() {
                 for (var rule in message) {
                     var messageText = message[rule];
                     for (var i = 0; i < messageText.length; i++) {
-                        $('#registration-form [name="form-messages"]').append(messageText[i] + '<br>');
+                        $('#registration-form [name="form-messages-error"]').append(messageText[i] + '<br>');
                     }
                 }
             }

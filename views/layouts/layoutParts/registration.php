@@ -19,7 +19,6 @@ use app\service\PageItems ;
 $mdReg = new UserRegistration();
 $mdProf = new UserProfile();
 $mdUpload = new UploadForm();
-$title = 'myRegistration';
 $urlUpload = Url::to(['site/upload']) ;
 $uploadFormId = "upload-form" ;
 $avatarImgId = 'avatar-img' ;
@@ -45,26 +44,16 @@ $registrationBt = $buttonsTab['registration'] ;
             </div>
             <div class="modal-body" id="modal-body">
 
-
-
-
-
-
-
-
-
-
-
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingOne">
                             <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#registration-form-collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     <?=$ruleTitle ?><span class="caret"></span>
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse in rule-content" role="tabpanel" aria-labelledby="headingOne">
+                        <div id="registration-form-collapseOne" class="panel-collapse collapse in rule-content" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body">
                                 <?=$ruleContent?>
                             </div>
@@ -72,50 +61,6 @@ $registrationBt = $buttonsTab['registration'] ;
                     </div>
 
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                 <div id="enter-modal-insert">
@@ -173,8 +118,12 @@ $registrationBt = $buttonsTab['registration'] ;
                             </div>
                         </div>
 <!---->
-                        <div class="col-lg-offset-1 form-messages" name="form-messages" >
-                        </div>
+                            <div class="form-messages-success" name="form-messages-success" >
+
+                            </div>
+                            <div class="form-messages-error" name="form-messages-error" >
+
+                            </div>
 
                         <?php ActiveForm::end(); ?>
 
@@ -184,7 +133,7 @@ $registrationBt = $buttonsTab['registration'] ;
             </div>
             <div class="modal-footer">
                 <p>
-                    <a class="btn btn-default" href="#" role="button" data-dismiss="modal" id="modal-exit">exit</a>
+<!--                    <a class="btn btn-default" href="#" role="button" data-dismiss="modal" id="modal-exit">exit</a>-->
                 </p>
             </div>
         </div>
