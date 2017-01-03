@@ -49,6 +49,15 @@ $i = 1 ;
 <h3 class="header-title page-title" > <?=$wdTitle['text']?> </h3>
 <div class="container">
 <?php
+/**
+ * формирует блок напраления работ
+ * по клику выводится модальная форма (wd-description)- полное описание
+ * @param $wdId - ид направления работ
+ * @param $wdCap - заголовк
+ * @param $wdImg - картинка
+ * @param $wdTextPiece  - кусок описания (под картинкой)
+ * @return string
+ */
   function wdItemBuild($wdId,$wdCap,$wdImg,$wdTextPiece) {
       $pTitle =  $wdCap ;
       $p = Html::tag('p', $pTitle,['class' => 'wd-text-title']) ;
@@ -58,7 +67,6 @@ $i = 1 ;
 
       $p1 = Html::tag('p', $wdTextPiece,['class' => 'wd-text']) ;
       $div1 = Html::beginTag('div') . $p .$img . $p1 . Html::endTag('div') ;
-//      $a = Html::beginTag('a',['href'=>'#','class'=>'for-click','title'=>'this is refer','data-toggle'=>"modal",'data-target'=>"#myModal"]) .$div1 . Html::endTag('a') ;
       $a = Html::beginTag('a',['href'=>'#','title'=>'this is refer',
               'onclick' => 'wdOnClick("'. $wdId . '")','data-toggle'=>"modal",'data-target'=>"#wd-description"]) .$div1 . Html::endTag('a') ;
 
@@ -87,17 +95,18 @@ echo $totalText ;
 ?>
 
 </div>
-
+<!-- модальная форма вывода описания направления работ id="wd-description"  -->
 <div class="modal fade" id="wd-description" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="wd-modal-title">войти</h4>
+                <h4 class="modal-title" id="wd-modal-title" name="modal-title">войти</h4>
             </div>
             <div class="modal-body" id="modal-body">
-                <div id="wd-modal-insert" class="wd-text">
+                <div id="wd-modal-insert" class="wd-text" name="modal-content">
+<!--  здесь вставка текста описания -->
                  </div>
             </div>
             <div class="modal-footer">

@@ -62,7 +62,6 @@ $loginBt = $buttonsTab['login'] ;
                 </div>
                 <div id="enter-modal-insert" >
                     <div class="site-login">
-
                         <?php
                         $form = ActiveForm::begin([
                             'id' => 'login-form',

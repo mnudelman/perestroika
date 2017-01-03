@@ -1,30 +1,45 @@
+/**
+ * описание направления работ.
+ * контент получается из контроллера site/workDirectGet
+ * вывод в модальное окно
+ * @param wdId - ид направления работ
+ */
 function wdOnClick(wdId) {
-    //alert('I\'m here.Enter. wdId :' + wdId) ;
+    var titleBlock = $('#wd-description [name="modal-title"]') ;
+    var contentBlock = $('#wd-description [name="modal-content"]') ;
+
     $.ajax({
         url: 'index.php?r=site%2Fwork-direct-get',
         data: {wdid: wdId},
         type: 'POST',
         success: function (res) {
-            //alert('I\'m here. success. wdId :' + wdId) ;
             var rr = JSON.parse(res);
             var title = rr['title'];
             var content = rr['content'];
-            $('#wd-modal-title').empty();
-            $('#wd-modal-title').append(title);
-            $('#wd-modal-insert').empty();
-            $('#wd-modal-insert').append(content);
-
-//            console.log(res);
+            titleBlock.empty();
+            titleBlock.append(title);
+            contentBlock.empty();
+            contentBlock.append(content);
         },
         error: function () {
             alert('Error!');
         }
     });
 }
+/**
+ * определяет доступность пунктов главного меню,
+ * открывает/зарывает возможность вывода форм :
+ * подключения(login), регистрации(registration), редактир профиля(profile)
+ * критерием является роль пользователя : гость(guest) | пользователь(user)
+ * вызывается по onclick перед вызовом формы
+ * определяется по состоянию эл-та списка - пункта меню "войти" (login)
+ * если className = "enable" - значит пользователь-гость
+ * @param isGuest
+ */
 function enterTargetControl(isGuest) {
     isGuest = (isGuest === undefined ) ? false : isGuest;
     var el = $('#topmenu-enter');
-    var cl  = $('#topmenu-enter')[0].className ;
+    var cl  = el[0].className ;
     isGuest = (cl === 'enable') ;
     var a = el.children('a')[0];
     a.dataset.target = (isGuest) ? '#enter-form' : '#';
@@ -32,29 +47,28 @@ function enterTargetControl(isGuest) {
     el = $('#topmenu-registration');
     a = el.children('a')[0];
     a.dataset.target = (isGuest) ? '#registration-form' : '#';
+// для формы регистрации, попутно, открыть возможность редактирования
     if (isGuest) {   // очиститть поля от пред использования
         $('#userregistration-username').removeAttr('readonly');
         $('#userregistration-enterpassword').removeAttr('readonly');
         $('#userregistration-enterpassword_repeat').removeAttr('readonly');
         $('#registration-form [name="form-messages-success"]').empty() ;
         $('#registration-form [name="form-messages-error"]').empty() ;
-
     }
-
-
 }
 
+/**
+ * отключить текущего пользователя от сайта
+ * после этого сайт открыт для нового подключения/регистрации
+ * * @param isGuest
+ * @param guestName - имя пользователя - гость
+ */
 function logoutOnClick(isGuest,guestName) {
-    //isGuest = (isGuest === undefined ) ? false : isGuest;
-    //if (isGuest) {
-    //    return ;
-    //}
     $.ajax({
         url: 'index.php?r=site%2Flogout',
         data: '',
         type: 'POST',
         success: function (res) {
-            //alert('I\'m here. success. wdId :' + wdId) ;
             var rr = JSON.parse(res);
             var success = rr['success'];
             var message = rr['message'];
@@ -72,25 +86,17 @@ function logoutOnClick(isGuest,guestName) {
             } else {
                     var a = 1 ;
                 }
-// переопределяем доступ ***
-//            console.log(res);
         },
-        //error: function () {
-        //    alert('Error!');
-        //}
-
         error: function (event, XMLHttpRequest, ajaxOptions, thrownError) {
             var responseText = event.responseText; // html - page
-
-
         }
     });
-
 }
 
-
+/**
+ * отправить данные для login
+ */
 function loginOnClick() {
-    //alert('loginOnForm - is here') ;
 // проверяем автономный контроль
     var err = false;
     var arr = $('#login-form .help-block');
@@ -125,7 +131,6 @@ function loginOnClick() {
         },
         type: 'POST',
         success: function (res) {
-            //alert('I\'m here. success. wdId :' + wdId) ;
             var rr = JSON.parse(res);
             var success = rr['success'];
             var message = rr['message'];
@@ -143,8 +148,7 @@ function loginOnClick() {
                     var avatarPath = 'images/avatars/' + avatar ;
                     $('#topmenu-avatar').attr('src', avatarPath);
                 }
-//                profileOnClick(1) ;  // плохая идея
-                $('#enter-form').modal('hide') ;
+                $('#enter-form').modal('hide') ;     // закрыть форму
             } else {
 
                 for (var rule in message) {
@@ -160,13 +164,23 @@ function loginOnClick() {
         }
     });
 }
+/**
+ * при регистрации требуется "возврат" в поле password для
+ * проверки совпадения с полем "повторного ввода пароля"
+ * если этого не делать остаётся сообщение о несовпадении полей
+ */
 $('#userregistration-enterpassword_repeat').on('blur',function() {
     $('#userregistration-enterpassword').blur() ;
 }) ;
+/**
+ * отправить данные регистрации
+ * данные непосредственно регистрации (username, password) и профиля (email,...)
+ * проверяются отдельно.
+ * Возможна ситуация, когда регистрация прошла, а вданных профиля есть ошибки,
+ * в этом случае пола username, password блокируются от последующих изменеий(readonly)
+ */
 function registrationOnClick() {
-    //alert('loginOnForm - is here') ;
-// проверяем автономный контроль
-
+// собщения автономного контроля
     var err = false;
     var arr = $('#registration-form .help-block');
     for (var i = 0; i < arr.length; i++) {
@@ -222,7 +236,7 @@ function registrationOnClick() {
             var rr = JSON.parse(res);
             var success = rr['success'];
             var message = rr['message'];
-            if (rr['successUser'] === true) {
+            if (rr['successUser'] === true) {               // регистрация выполнена
                 $('#topmenu-logout').removeAttr('hidden') ;
                 $('#topmenu-logout')[0].className = 'enable';
                 $('#topmenu-enter').attr('hidden','hidden') ;
@@ -234,7 +248,6 @@ function registrationOnClick() {
                 $('#topmenu-office')[0].className = 'enable';
                 $('#topmenu-username').text(userName);
 
-                //$('#modal-exit').click();      // закрываем окно login-form
                 $('#userregistration-username').attr('readonly','readonly');
                 $('#userregistration-enterpassword').attr('readonly','readonly');
                 $('#userregistration-enterpassword_repeat').attr('readonly','readonly');
@@ -245,7 +258,7 @@ function registrationOnClick() {
                 $('#registration-form [name="form-messages-error"]').
                     append(rr['messageRegistration'] + '<br>');
             }
-            if (rr['successProfile']) {
+            if (rr['successProfile']) {                     // данные профиля сохранены
                 imgFilePath = $('#avatar-img').attr('src');
                 if (imgFilePath.length > 0) {
                     $('#topmenu-avatar').attr('src', imgFilePath);
@@ -278,9 +291,11 @@ function registrationOnClick() {
     });
 
 }
-
+/**
+ * отправить данные редактирования профиля
+ * @param restorePrevious - восстанвить последние сохранённые значения профиля
+ */
 function profileOnClick(restorePrevious) {
-    //alert('loginOnForm - is here') ;
 // проверяем автономный контроль
     restorePrevious = (restorePrevious === undefined ) ? false : restorePrevious ;
     if (!restorePrevious) {
@@ -328,7 +343,6 @@ function profileOnClick(restorePrevious) {
         data: data,
         type: 'POST',
         success: function (res) {
-            //alert('I\'m here. success. wdId :' + wdId) ;
             var rr = JSON.parse(res);
             opcod = rr['opcod'] ;
             if (opcod === 'get') {
@@ -368,11 +382,8 @@ function profileOnClick(restorePrevious) {
     });
 
 }
-
-
-
 /**
- *
+ * загрузить изображение на сайт
  * @param uploadFormId - форма для загрузки изображения
  * @param urlUpload    - контроллер, обрабатывающий запрос на файл-изображение
  * @param avatarImgId  - ид элемента-изображения на странице

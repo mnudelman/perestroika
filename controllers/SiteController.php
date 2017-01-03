@@ -66,6 +66,10 @@ class SiteController extends BaseController
     {
         return $this->render('about');
     }
+
+    /**
+     * получить описание описание направления работ
+     */
     public function actionWorkDirectGet() {
         if( Yii::$app->request->isAjax ){
             $query = Yii::$app->request->post() ;

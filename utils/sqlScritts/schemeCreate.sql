@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 COLLATE=utf8_unicode_ci;
 
 -- userprofile - Профиль пользователя
---drop table userprofile ;
+drop table userprofile ;
 CREATE TABLE IF NOT EXISTS userprofile (
   id         INTEGER NOT NULL  AUTO_INCREMENT PRIMARY KEY,
   userid     INTEGER
